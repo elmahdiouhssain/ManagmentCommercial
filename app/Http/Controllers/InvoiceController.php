@@ -8,6 +8,7 @@ use App\Http\Requests\PostFormRequest;
 
 use App\Models\Customers;
 use App\Models\Suppliers;
+use App\Models\Products;
 use App\Models\Invoices;
 use DataTables;
 
@@ -38,6 +39,7 @@ class InvoiceController extends Controller
     public function create(){
         $data['customers'] = Customers::latest()->get();
         $data['suppliers'] = Suppliers::latest()->get();
+        $data['products'] = Products::latest()->get();
         return view('invoices.create',compact('data'));
     }
 

@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/products/update/{id}', [ProductController::class, 'update'])->name('updateproducts');
     Route::get('/products/del/{id}', [ProductController::class, 'destroy'])->name('delproduct');
 
+    Route::get('/products/ajax/forselect', [ProductController::class, 'ProductsAjaxlist'])->name('productsforlist');
 
     Route::get('/invoices', [InvoiceController::class, 'InvoicesShow'])->name('invoiceslist');
     //////This is just a test for loading datas customers using ajax /////

@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\PostFormRequest;
-
+use Response;
 use App\Models\Products;
 use DataTables;
 
@@ -32,7 +32,14 @@ class ProductController extends Controller
                 ->make(true);
         }
     }
-        public function store(Request $request)
+
+    public function ProductsAjaxlist() {
+        $data['title'] = "Products list";
+        $data['productsajax'] = Products::latest()->get();
+        return Response::json($data['productsajax']);
+    }
+    
+    public function store(Request $request)
         {
             $this->validate($request, [
             'name' => 'required|min:3',

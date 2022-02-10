@@ -59,17 +59,24 @@
                 <table class="table table-bordered" id="dynamicAddRemove">
 
                 <br><tr>
-                    <th>Nom produit :</th>
-                    <th>Quantité :</th>
-                    <th>PrixU(DHS) :</th>
-                    <th>Total(DHS) :</th>
+                    <th>Product name :</th>
+                    <th>Quantity :</th>
+                    <th>Price U :</th>
+                    <th>Price Total :</th>
                     <button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary btn-sm btn-block"><i class="fas fa-plus"></i> New Product</button>
                 </tr>
                 <tr>
-                    <td><input type="text" id="produit_name[0]" name="produit_name[0]" placeholder="Nom du produit" class="form-control" /></td>
-                    <td><input type="text" id="quantite[0]" name="quantite[0]" placeholder="Quantité" class="form-control" /></td>
-                    <td><input type="text" id="prix_u[0]" name="prix_u[0]" placeholder="PrixU" class="form-control" /></td>
-                    <td><input type="text" id="total[0]" name="total[0]" placeholder="Total" class="form-control" /></td>
+                    <td>
+                        <select class="form-control" name="designation[0]" id="designation[0]">
+                        @foreach ($data['products'] as $product)
+                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                        @endforeach
+                        </select>
+                    </td>
+
+                    <td><input type="text" id="qte[0]" name="qte[0]" placeholder="Quantity" class="form-control" /></td>
+                    <td><input type="text" id="p_u[0]" name="p_u[0]" placeholder="Price U" class="form-control" /></td>
+                    <td><input type="text" id="p_t[0]" name="p_t[0]" placeholder="Total price" class="form-control" /></td>
                     <script type="text/javascript"></script>
                     </tr>
                     </table>
@@ -105,24 +112,51 @@
             </div>
         </div>
 
-         <script src="{{ asset('/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('/js/jquery.min.js') }}"></script>
                             <script type="text/javascript">
-                                var i = 0;
-    $("#dynamic-ar").click(function () {
-        ++i;
-        $("#dynamicAddRemove").append('<tr><td><input type="text" name="produit_name[' + i +
-            ']" id="produit_name[' + i +
-            ']" placeholder="Nom du produit" class="form-control" /></td><td><input type="text" id="quantite[' + i +
-            ']" name="quantite[' + i +
-            ']" placeholder="Quantite" class="form-control" /></td><td><input type="text" id="prix_u[' + i +
-            ']" name="prix_u[' + i +
-            ']" placeholder="PrixU" class="form-control" /></td><td><input type="text" id="total[' + i +
-            ']" name="total[' + i +
-            ']" placeholder="Total" class="form-control" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field"><i class="fas fa-trash"></i></button></td></tr>'
-            );
-    });
-    $(document).on('click', '.remove-input-field', function () {
-        $(this).parents('tr').remove();
-    });
+                fetch('/products/ajax/forselect', {
+                method: 'GET', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'url': '/products/ajax/forselect',
+                    "X-CSRF-Token": document.querySelector('input[name=_token]').value
+                },
+            })
+        .then((resp) => resp.json())
+        .then(function(data) {
+            if (data) {
+                data.forEach(function(prod) {
+                    //console.log(prod.name);
+                    let id_prod = prod.id;
+                    let name_prod = prod.name;
+                    //console.log(id_prod);
+                });
+
+                        var i = 0;
+                        $("#dynamic-ar").click(function () {
+                            ++i;
+                            $("#dynamicAddRemove").append('<tr><td><select class="form-control"name="designation[' + i +
+                                ']" id="designation[' + i +
+                                ']"><option value="">'+ prod.id +'</option></select></td><td><input type="text" id="qte[' + i +
+                                ']" name="qte[' + i +
+                                ']" placeholder="Quantity" class="form-control" /></td><td><input type="text" id="p_u[' + i +
+                                ']" name="p_u[' + i +
+                                ']" placeholder="Price U" class="form-control" /></td><td><input type="text" id="total[' + i +
+                                ']" name="p_t[' + i +
+                                ']" placeholder="Total price" class="form-control" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field"><i class="fas fa-trash"></i></button></td></tr>'
+                                );
+                        });
+                        $(document).on('click', '.remove-input-field', function () {
+                            $(this).parents('tr').remove();
+                        });
+
+                } else {
+                  console.log('connection failed');
+            }
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
                             </script>
 @endsection
