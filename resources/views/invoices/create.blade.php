@@ -101,7 +101,6 @@
                                 </div>
                                  </div>
                             </div>
-                                
                                 <div class="form-group">
                                     <button class="btn btn-danger btn-sm btn-block" type="submit"><i class="fas fa-save"></i> Save</button>
                                 </div>
@@ -113,50 +112,45 @@
         </div>
 
         <script src="{{ asset('/js/jquery.min.js') }}"></script>
-                            <script type="text/javascript">
-                fetch('/products/ajax/forselect', {
-                method: 'GET', 
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'url': '/products/ajax/forselect',
-                    "X-CSRF-Token": document.querySelector('input[name=_token]').value
-                },
-            })
-        .then((resp) => resp.json())
-        .then(function(data) {
-            if (data) {
-                data.forEach(function(prod) {
-                    //console.log(prod.name);
-                    let id_prod = prod.id;
-                    let name_prod = prod.name;
-                    //console.log(id_prod);
-                });
-
+                    <script type="text/javascript">
                         var i = 0;
-                        $("#dynamic-ar").click(function () {
+                        var pro_id = 0;
+                        var pro_nm = 0;
+                        $.ajax({ 
+                                type: 'GET', 
+                                url: '/products/ajax/forselect', 
+                                data: { get_param: 'value' }, 
+                                dataType: 'json',
+                                success: function (data) { 
+
+                                    $.each(data, function(index, element) {
+                                        var p_id = element.id;
+                                        var p_name = element.name;
+                                        //console.log(p_id);
+                                    });
+                                }
+                            });
+                        
+                        $("#dynamic-ar").click(function (event) {
                             ++i;
+                            var id=$(this).data('id'); 
+                            var name=$(this).data('name'); 
+
+                            console.log(name);
+
                             $("#dynamicAddRemove").append('<tr><td><select class="form-control"name="designation[' + i +
                                 ']" id="designation[' + i +
-                                ']"><option value="">'+ prod.id +'</option></select></td><td><input type="text" id="qte[' + i +
+                                ']"><option value=""></option></select></td><td><input type="text" id="qte[' + i +
                                 ']" name="qte[' + i +
-                                ']" placeholder="Quantity" class="form-control" /></td><td><input type="text" id="p_u[' + i +
+                                ']" placeholder="Quantity" class="form-control"/></td><td><input type="text" id="p_u[' + i +
                                 ']" name="p_u[' + i +
                                 ']" placeholder="Price U" class="form-control" /></td><td><input type="text" id="total[' + i +
                                 ']" name="p_t[' + i +
                                 ']" placeholder="Total price" class="form-control" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field"><i class="fas fa-trash"></i></button></td></tr>'
                                 );
-                        });
-                        $(document).on('click', '.remove-input-field', function () {
-                            $(this).parents('tr').remove();
-                        });
-
-                } else {
-                  console.log('connection failed');
-            }
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
-                            </script>
+                            });
+                            $(document).on('click', '.remove-input-field', function () {
+                                $(this).parents('tr').remove();
+                            });
+                        </script>
 @endsection
