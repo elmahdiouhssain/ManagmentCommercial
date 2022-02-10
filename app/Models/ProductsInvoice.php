@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class ProductsInvoice extends Model
 {
     use HasFactory;
-    protected $table = 'products';
+    protected $table = 'products_invoices';
     public $timestamps = true;
     protected $fillable = [
-        'name',
-        'details',
-        'price',
-        'tax',
-        'is_active'=> 'boolean',
+        'invoice_id',
+        'designation',
+        'uml',
+        'qte',
+        'p_u',
+        'p_t',
+        'is_paid'=> 'boolean',
     ];
-
 }

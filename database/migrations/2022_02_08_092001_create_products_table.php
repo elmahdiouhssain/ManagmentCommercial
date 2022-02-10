@@ -15,13 +15,11 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('invoice_id');
-            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->string('name')->unique();
-            $table->text('desc')->nullable();
+            $table->text('details')->nullable();
             $table->string('price');
             $table->string('tax')->nullable();
-            $table->boolean('is_active')->default(False);
+            $table->boolean('is_active')->default(True);
             $table->timestamps();
         });
     }

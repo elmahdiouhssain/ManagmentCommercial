@@ -117,7 +117,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <button class="btn btn-warning btn-sm btn-block" type="submit"><i class="fas fa-save"></i>Save</button>
+                                    <button class="btn btn-warning btn-sm btn-block" type="submit"><i class="fas fa-save"></i> Save</button>
                                     <a href="/suppliers/del/<?php echo$data['supplier'][0]->id; ?>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sur wanna delete this supplier')"><i class="fas fa-trash"></i> Delete this supplier</a>
 
                                     

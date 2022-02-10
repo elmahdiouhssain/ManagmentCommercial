@@ -39,10 +39,10 @@
             <a class="nav-link " href="{{ route('supplierslist') }}"><i class="fas fa-shipping-fast"></i> SUPPLIERS</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link " href="#"><i class="fas fa-file-invoice"></i> INVOICES</a>
+            <a class="nav-link " href="{{ route('invoiceslist') }}"><i class="fas fa-file-invoice"></i> INVOICES</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link " href="#"><i class="fas fa-box"></i> PRODUCTS</a>
+            <a class="nav-link " href="{{ route('productslist') }}"><i class="fas fa-box"></i> PRODUCTS</a>
           </li>
           </div>
           
