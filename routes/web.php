@@ -7,6 +7,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ProductInvoiceController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +36,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/customers/update/{id}', [CustomersController::class, 'update'])->name('updatecustomer');
     Route::get('/customers/del/{id}', [CustomersController::class, 'destroy'])->name('delcustomer');
 
-
     Route::get('/suppliers', [SupplierController::class, 'SuppliersShow'])->name('supplierslist');
     //////This is just a test for loading datas suppliers using ajax /////
     Route::get('/suppliers/ajax', [SupplierController::class, 'SuppliersShowAjax'])->name('suppliers');
@@ -42,7 +43,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/suppliers/edit/{id}', [SupplierController::class, 'show'])->name('showsupplier');
     Route::post('/suppliers/update/{id}', [SupplierController::class, 'update'])->name('updatesuppliers');
     Route::get('/suppliers/del/{id}', [SupplierController::class, 'destroy'])->name('delsupplier');
-
 
     Route::get('/products', [ProductController::class, 'ProductsShow'])->name('productslist');
     //////This is just a test for loading datas products using ajax /////
@@ -60,13 +60,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('createinvoices');
     Route::post('/invoices/store', [InvoiceController::class, 'store'])->name('storeinvoice');
     
+    Route::post('/invoices/store/product', [ProductInvoiceController::class, 'storeProdforInvoice'])->name('storeprodforinvoice');
 
     
+    
     Route::get('/logout', [DashboardController::class, 'logout'])->name('log.out');
-
 });
-
-
 
 
 

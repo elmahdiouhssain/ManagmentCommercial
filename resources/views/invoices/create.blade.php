@@ -1,7 +1,9 @@
 @extends('layouts.la')
 @section('content')
+<script src="{{ asset('/js/jquery.min.js') }}"></script>
+
 <div class="container">
-					<div class="row">
+                    <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
                                 <h1 class="main-title float-left"></h1>
@@ -13,21 +15,10 @@
                             </div>
                         </div>
                     </div>
-    		<center>
-            <a href="" class="btn btn-success">
-                <i class="fas fa-eye"></i> Save & Preview
-            </a>
-            <br><br>
-      		@include('flash-message')
-      	    </center>
-
-            <div class="container">
-            <div class="card">
-                <br>
-                    <form action="/invoices/store/" method="POST">
+                    <div class="container">
+                        <form action="/invoices/store/" method="POST">
                         @csrf
-                        <div class="container">
-                               <div class="row">
+                            <div class="row">
                                 <div class="col">
                                 <div class="form-group">
                                     <label for="customer_id">Customer :</label>
@@ -55,102 +46,125 @@
                                 </div>
                                 </div>
                             </div>
-                           
-                <table class="table table-bordered" id="dynamicAddRemove">
+                        </form>
 
-                <br><tr>
-                    <th>Product name :</th>
-                    <th>Quantity :</th>
-                    <th>Price U :</th>
-                    <th>Price Total :</th>
-                    <button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary btn-sm btn-block"><i class="fas fa-plus"></i> New Product</button>
-                </tr>
-                <tr>
-                    <td>
-                        <select class="form-control" name="designation[0]" id="designation[0]">
+        <!-- The Modal -->
+          <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title"><i class="fas fa-box"></i> Add new product to invoice</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                    <div class="form-group">
+                        <label>Select Product : </label>
+                        <select class="designation form-control" name="designation" id="designation">
                         @foreach ($data['products'] as $product)
                         <option value="{{ $product->id }}">{{ $product->name }}</option>
                         @endforeach
                         </select>
-                    </td>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Unit : </label>
+                        <input type="text" id="uml" name="uml" placeholder="Unity" class="uml form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity : </label>
+                        <input type="number" id="qte" name="qte" placeholder="Quantity" class="qte form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Price Unit : </label>
+                        <input type="text" id="p_u" name="p_u" placeholder="Price U" class="p_u form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Total amount : </label>
+                        <input type="text" id="p_t" name="p_t" placeholder="Total price" class="p_t form-control" />
+                    </div>
 
-                    <td><input type="text" id="qte[0]" name="qte[0]" placeholder="Quantity" class="form-control" /></td>
-                    <td><input type="text" id="p_u[0]" name="p_u[0]" placeholder="Price U" class="form-control" /></td>
-                    <td><input type="text" id="p_t[0]" name="p_t[0]" placeholder="Total price" class="form-control" /></td>
+                    <div class="form-group">
+                        <button class="btn btn-success btn-sm btn-block add_prod_invoice" id="add_prod_invoice" name="add_prod_invoice">ADD</button>
+                    </div>
+
+                </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          
+
+          <div class="card">
+          <table class="table table-bordered" id="dynamicAddRemove">
+
+                <br><tr>
+                    <th>Product name :</th>
+                    <th>Unity :</th>
+                    <th>Quantity :</th>
+                    <th>Price U :</th>
+                    <th>Price Total :</th>
+                    <button type="button" name="add" id="dynamic-ar" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i> New Product</button>
+                    <a href="" class="btn btn-success btn-sm btn-block"><i class="fas fa-eye"></i> Save & Preview</a>
+                    <br><center>@include('flash-message')</center><br>
+                </tr>
+                <tr>
+                    <td><input readonly type="text" id="designation" name="designation"  class="form-control" /></td>
+                    <td><input readonly type="text" id="uml" name="uml"  class="form-control" /></td>
+                    <td><input readonly type="number" id="qte" name="qte" class="form-control" /></td>
+                    <td><input readonly type="text" id="p_u" name="p_u" class="form-control" /></td>
+                    <td><input readonly type="text" id="p_t" name="p_t" class="form-control" /></td>
+                    <td><a href=""></a><i class="fas fa-trash" style="color:red;"></i></td>
                     <script type="text/javascript"></script>
                     </tr>
                     </table>
-                                <div class="row">
-                                    <div class="col">
-                                    </div>
-                                <div class="col">
-                                <div class="form-group">
-                                    <label for="total_ht">Total price :</label>
-                                    <input type="string" name="total_ht" class="form-control" id="total_ht"required="">
-                                    @if ($errors->has('total_ht'))
-                                    <span style="color: red;">{{ $errors->first('total_ht') }}</span>
-                                    @endif
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="total_tva">Tax price :</label>
-                                    <input type="text" name="total_tva" class="form-control" id="total_tva"required="">
-                                    @if ($errors->has('total_tva'))
-                                    <span style="color: red;">{{ $errors->first('total_tva') }}</span>
-                                    @endif
-                                </div>
-                                 </div>
-                            </div>
-                                <div class="form-group">
-                                    <button class="btn btn-danger btn-sm btn-block" type="submit"><i class="fas fa-save"></i> Save</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
             </div>
-        </div>
+            <script>
+              $(document).ready(function (){
+                $(document).on('click', '.add_prod_invoice', function (e){
+                    e.preventDefault();
+                    var data = {
+                        'designation':$('.designation').val(),
+                        'uml':$('.uml').val(),
+                        'qte':$('.qte').val(),
+                        'p_u':$('.p_u').val(),
+                        'p_t':$('.p_t').val(),
+                    }
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type:"POST",
+                        url:"/invoices/store/product",
+                        data:data,
+                        dataType:"json",
+                        success:function (response){
+                            console.log(response);
+                            if(response.status == 400){
+                                $('#savedform_errList').html("");
+                                $('#savedform_errList').addClass('alert alert-danger');
+                                $.each(response.errors, function (key, err_values){
+                                    $('#savedform_errList').append('<span>'+err_values+'</span>');
+                                });
+                            }
+                            else{
+                                $('#success_message').addClass('alert alert-success')
+                                $('#success_message').text(response.message)
+                            }
+                        }
+                    })
+                })
+              })
+          </script>
+       
+    </div>
 
-        <script src="{{ asset('/js/jquery.min.js') }}"></script>
-                    <script type="text/javascript">
-                        var i = 0;
-                        var pro_id = 0;
-                        var pro_nm = 0;
-                        $.ajax({ 
-                                type: 'GET', 
-                                url: '/products/ajax/forselect', 
-                                data: { get_param: 'value' }, 
-                                dataType: 'json',
-                                success: function (data) { 
-
-                                    $.each(data, function(index, element) {
-                                        var p_id = element.id;
-                                        var p_name = element.name;
-                                        //console.log(p_id);
-                                    });
-                                }
-                            });
-                        
-                        $("#dynamic-ar").click(function (event) {
-                            ++i;
-                            var id=$(this).data('id'); 
-                            var name=$(this).data('name'); 
-
-                            console.log(name);
-
-                            $("#dynamicAddRemove").append('<tr><td><select class="form-control"name="designation[' + i +
-                                ']" id="designation[' + i +
-                                ']"><option value=""></option></select></td><td><input type="text" id="qte[' + i +
-                                ']" name="qte[' + i +
-                                ']" placeholder="Quantity" class="form-control"/></td><td><input type="text" id="p_u[' + i +
-                                ']" name="p_u[' + i +
-                                ']" placeholder="Price U" class="form-control" /></td><td><input type="text" id="total[' + i +
-                                ']" name="p_t[' + i +
-                                ']" placeholder="Total price" class="form-control" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field"><i class="fas fa-trash"></i></button></td></tr>'
-                                );
-                            });
-                            $(document).on('click', '.remove-input-field', function () {
-                                $(this).parents('tr').remove();
-                            });
-                        </script>
 @endsection

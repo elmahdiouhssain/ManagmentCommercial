@@ -17,6 +17,6 @@ class ProductsInvoice extends Model
         'qte',
         'p_u',
         'p_t',
-        'is_paid'=> 'boolean',
+        //'is_paid'=> 'boolean',
     ];
 }
