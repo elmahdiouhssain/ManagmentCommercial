@@ -18,7 +18,6 @@ class Invoices extends Model
         'total_ht',
         'total_tva',
         'total_ttc',
-
         'is_paid'=> 'boolean',
     ];
 

@@ -36,10 +36,13 @@ class ProductInvoiceController extends Controller
                     'status'=>200,
                     'message'=>'Product added to invoice successfully',
                 ]);
+        }
 
-               
-            
- 
+    public function destroy($id) {
+            $product = ProductsInvoice::find($id);
+            $product->delete();
+            return back()->with('success', 'Product deleted successfuly !');
+
         }
 
 }
