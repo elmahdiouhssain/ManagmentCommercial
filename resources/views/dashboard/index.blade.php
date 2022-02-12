@@ -8,7 +8,7 @@
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="panel panel-dark panel-colorful">
                 <div class="panel-body text-center">
-                	<p class="text-uppercase mar-btm text-sm">Customers</p>
+                	<p class="text-uppercase mar-btm text-sm">Clients</p>
                 	<i class="fa fa-users fa-5x"></i>
                 	<hr>
                 	<p class="h2 text-thin">254,487</p>
@@ -19,18 +19,18 @@
         <div class="col-md-3 col-sm-6 col-xs-12">
         	<div class="panel panel-danger panel-colorful">
         		<div class="panel-body text-center">
-        			<p class="text-uppercase mar-btm text-sm">Products</p>
+        			<p class="text-uppercase mar-btm text-sm">Produits</p>
         			<i class="fas fa-box fa-5x"></i>
         			<hr>
         			<p class="h2 text-thin">873</p>
-        			<small><span class="text-semibold"><i class="fa fa-unlock-alt fa-fw"></i> 154</span> Unapproved products</small>
+        			<small><span class="text-semibold"><i class="fa fa-unlock-alt fa-fw"></i> 154 </span>Produits limité</small>
         		</div>
         	</div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
         	<div class="panel panel-primary panel-colorful">
         		<div class="panel-body text-center">
-        			<p class="text-uppercase mar-btm text-sm">Invoices</p>
+        			<p class="text-uppercase mar-btm text-sm">Factures</p>
         			<i class="fas fa-file-invoice fa-5x"></i>
         			<hr>
         			<p class="h2 text-thin">2,423</p>
@@ -41,7 +41,7 @@
         <div class="col-md-3 col-sm-6 col-xs-12">
         	<div class="panel panel-info panel-colorful">
         		<div class="panel-body text-center">
-        			<p class="text-uppercase mar-btm text-sm">Paid Invoices</p>
+        			<p class="text-uppercase mar-btm text-sm">Facture payé</p>
         			<i class="fa fa-shopping-cart fa-5x"></i>
         			<hr>
         			<p class="h2 text-thin">7,428</p>

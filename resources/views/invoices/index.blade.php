@@ -66,7 +66,7 @@
                     </div>
     		<center>
     		<a href="{{ route('createinvoices') }}" class="btn btn-danger" >
-        		<i class="fas fa-file-invoice"></i> New Invoice
+        		<i class="fas fa-file-invoice"></i> Nouvelle facture
       		</a><br>
       		@include('flash-message')
       	    </center>
@@ -75,13 +75,13 @@
         		        <table class="table table-striped" id="emptableid" width="100%">
         		            <thead>
         		                <tr>
-        		                  <th>Invoice for</th>
-        		                  <th>Release date</th>
-        		                  <th>Total cost</th>
+        		                  <th>Facture pour</th>
+        		                  <th>Date</th>
+        		                  <th>Total</th>
                                   <th>Paiement</th>
-        		                  <th>Supplier</th>
-                                  <th>Created by</th>
-        		                  <th>Created_at</th>
+        		                  <th>Fournisseur</th>
+                                  <th>Facture par</th>
+        		                  <th>Enregistré à</th>
         		                  <th>Action </th>
         		                </tr>
         		            </thead>

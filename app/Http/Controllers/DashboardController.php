@@ -20,6 +20,6 @@ class DashboardController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login')->with('warning', 'You are logged out with success !');
+        return redirect('/login')->with('warning', 'Vous etes deconnecté avec succée !');
     }
 }

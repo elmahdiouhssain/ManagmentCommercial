@@ -72,7 +72,7 @@
 		      
 		        <!-- Modal Header -->
 		        <div class="modal-header">
-		          <h4 class="modal-title"><i class="fas fa-box"></i> Add new product</h4>
+		          <h4 class="modal-title"><i class="fas fa-box"></i> Ajouté un produit</h4>
 		          <button type="button" class="close" data-dismiss="modal">&times;</button>
 		        </div>
 		        
@@ -83,7 +83,7 @@
 		          	{!! Form::open(array('route' => 'newproduct','method'=>'POST')) !!}
                         @csrf
                                 <div class="form-group">
-                                    <label for="name">Product name : <span style="color:red;">required (*)</span></label>
+                                    <label for="name">Produit : <span style="color:red;">required (*)</span></label>
                                     <input type="text" name="name" class="form-control" id="name"required="">
                                     @if ($errors->has('name'))
                                     <span style="color: red;">{{ $errors->first('name') }}</span>
@@ -99,7 +99,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="price">Price :</label>
+                                    <label for="price">Prix :</label>
                                     <input type="number" name="price" class="form-control" id="price"required="">
                                     @if ($errors->has('price'))
                                     <span style="color: red;">{{ $errors->first('price') }}</span>
@@ -107,7 +107,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tax">Tax price :</label>
+                                    <label for="tax">Tva prix :</label>
                                     <input type="text" name="tax" class="form-control" id="tax"required="">
                                     @if ($errors->has('tax'))
                                     <span style="color: red;">{{ $errors->first('tax') }}</span>
@@ -115,7 +115,7 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <button class="btn btn-danger btn-sm btn-block" type="submit">Save</button>
+                                    <button class="btn btn-danger btn-sm btn-block" type="submit">Enregistré</button>
                                     
                                 </div>
                     {!! Form::close() !!}
@@ -123,7 +123,7 @@
 		        
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		          <button type="button" class="btn btn-secondary" data-dismiss="modal">Quitté</button>
 		        </div>
 		        
 		      </div>
@@ -131,7 +131,7 @@
 		  </div>
 		<center>
 		<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModal">
-    		<i class="fas fa-box"></i> New Product
+    		<i class="fas fa-box"></i> Nouveau produit
   		</button><br>
   		@include('flash-message')
   	</center>
@@ -140,11 +140,11 @@
 		        <table class="table table-striped" id="emptableid" width="100%">
 		            <thead>
 		                <tr>
-		                  <th>Name</th>
-		                  <th>Price</th>
-		                  <th>Tax cost</th>
-		                  <th>Availability</th>
-		                  <th>Created_at</th>
+		                  <th>Nom</th>
+		                  <th>Prix</th>
+		                  <th>Tva</th>
+		                  <th>Disponiblité</th>
+		                  <th>Enregistré à</th>
 		                  <th>Action </th>
 		                </tr>
 		            </thead>

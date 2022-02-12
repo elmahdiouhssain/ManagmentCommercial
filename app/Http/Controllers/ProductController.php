@@ -52,7 +52,7 @@ class ProductController extends Controller
         $post->tax = $request->input('tax');
         //$post->is_active = $request->has('is_active');
         $post->save();
-        return redirect('/products')->with('success', 'Product saved successfuly !');
+        return redirect('/products')->with('success', 'Produit enregistré avec succèe !');
         }
 
          public function show($id) {
@@ -69,14 +69,14 @@ class ProductController extends Controller
             $is_active = $request->has('is_active');
 
             DB::update('update products set name=?,details=?,price=?,tax=?,is_active=? where id = ?',[$name,$details,$price,$tax,$is_active,$id]);
-            return redirect('/products')->with('success', 'Product updated successfuly !');
+            return redirect('/products')->with('success', 'Produit edité avec succée !');
 
         }
 
         public function destroy($id) {
             $product = Products::find($id);
             $product->delete();
-            return redirect('/products')->with('success', 'Product deleted successfuly !');
+            return redirect('/products')->with('success', 'Produit supprimé avec succée !');
 
         }
 }

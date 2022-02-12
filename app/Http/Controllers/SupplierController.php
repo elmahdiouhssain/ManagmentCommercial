@@ -53,7 +53,7 @@ class SupplierController extends Controller
         $post->province = $request->input('province');
         $post->fname = $request->input('fname');
         $post->save();
-        return redirect('/suppliers')->with('success', 'Supplier saved successfuly !');
+        return redirect('/suppliers')->with('success', 'Fournisseur enregistré avec succée !');
         }
 
         public function show($id) {
@@ -77,14 +77,14 @@ class SupplierController extends Controller
 
             DB::update('update suppliers set vendor_name=?,email=?,tele=?,currency=?,addr1=?,addr2=?,city=?,zipcode=?,country=?,province=?,fname=? where id = ?',[$vendor_name,$email,$tele,$currency,$addr1,$addr2,$city,$zipcode,$country,$province,$fname,$id]);
 
-            return redirect('/suppliers')->with('success', 'Supplier updated successfuly !');
+            return redirect('/suppliers')->with('success', 'Fournisseur modifié avec succée !');
 
         }
 
         public function destroy($id) {
             $customer = Suppliers::find($id);
             $customer->delete();
-            return redirect('/suppliers')->with('success', 'Supplier deleted successfuly !');
+            return redirect('/suppliers')->with('success', 'Fournisseur supprimé avec succée !');
 
         }
 }

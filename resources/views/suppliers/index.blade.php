@@ -73,7 +73,7 @@
 		      
 		        <!-- Modal Header -->
 		        <div class="modal-header">
-		          <h4 class="modal-title"><i class="fas fa-shipping-fast"></i> Add new supplier</h4>
+		          <h4 class="modal-title"><i class="fas fa-shipping-fast"></i> Ajouté nouveau fournisseur</h4>
 		          <button type="button" class="close" data-dismiss="modal">&times;</button>
 		        </div>
 		        
@@ -84,7 +84,7 @@
 		          	{!! Form::open(array('route' => 'newsupplier','method'=>'POST')) !!}
                         @csrf
                                 <div class="form-group">
-                                    <label for="vendor_name">Vendor name : <span style="color:red;">required (*)</span></label>
+                                    <label for="vendor_name">Fournisseur : <span style="color:red;">required (*)</span></label>
                                     <input type="text" name="vendor_name" class="form-control" id="vendor_name"required="">
                                     @if ($errors->has('vendor_name'))
                                     <span style="color: red;">{{ $errors->first('nom_complete') }}</span>
@@ -108,17 +108,17 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="fname">Full name :</label>
+                                    <label for="fname">Nom complèt :</label>
                                     <input type="text" name="fname" class="form-control" id="fname"required="">
                                     @if ($errors->has('fname'))
                                     <span style="color: red;">{{ $errors->first('fname') }}</span>
                                     @endif
                                 </div>
                                 <center>
-                                <hr>ADDITIONAL INFORMATIONS :<hr>
+                                <hr>AUTRE INFORMATIONS :<hr>
                                 </center>
                                 <div class="form-group">
-                                    <label for="nom_complete">Country :</label>
+                                    <label for="nom_complete">Pays :</label>
                                     <input type="text" name="country" class="form-control" id="country"required="">
                                     @if ($errors->has('country'))
                                     <span style="color: red;">{{ $errors->first('country') }}</span>
@@ -126,7 +126,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nom_complete">City :</label>
+                                    <label for="nom_complete">Ville :</label>
                                     <input type="text" name="city" class="form-control" id="city"required="">
                                     @if ($errors->has('city'))
                                     <span style="color: red;">{{ $errors->first('city') }}</span>
@@ -134,7 +134,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nom_complete">Zip code :</label>
+                                    <label for="nom_complete">Code postal :</label>
                                     <input type="text" name="zipcode" class="form-control" id="zipcode"required="">
                                     @if ($errors->has('zipcode'))
                                     <span style="color: red;">{{ $errors->first('zipcode') }}</span>
@@ -142,7 +142,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nom_complete">Province :</label>
+                                    <label for="nom_complete">Region :</label>
                                     <input type="text" name="province" class="form-control" id="province"required="">
                                     @if ($errors->has('province'))
                                     <span style="color: red;">{{ $errors->first('province') }}</span>
@@ -166,7 +166,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="currency">Currency :</label>
+                                    <label for="currency">Devis :</label>
                                     <select class="form-control" name="currency">
                                     	<option>DOLLAR (USD)</option>
                                     	<option>EURO (EUR)</option>
@@ -177,7 +177,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <button class="btn btn-danger btn-sm btn-block" type="submit">Save</button>
+                                    <button class="btn btn-danger btn-sm btn-block" type="submit">Enregistré</button>
                                     
                                 </div>
                     {!! Form::close() !!}
@@ -185,7 +185,7 @@
 		        
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		          <button type="button" class="btn btn-secondary" data-dismiss="modal">Quitté</button>
 		        </div>
 		        
 		      </div>
@@ -193,7 +193,7 @@
 		  </div>
 		<center>
 		<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModal">
-    		<i class="fas fa-shipping-fast"></i> New Supplier
+    		<i class="fas fa-shipping-fast"></i> Nouveau fournisseur
   		</button><br>
   		@include('flash-message')
   	</center>
@@ -202,11 +202,11 @@
 		        <table class="table table-striped" id="emptableid" width="100%">
 		            <thead>
 		                <tr>
-		                  <th>Vendor</th>
+		                  <th>Fournisseur</th>
 		                  <th>Email</th>
-		                  <th>Phone</th>
-		                  <th>Country</th>
-		                  <th>Created_at</th>
+		                  <th>Télèphone</th>
+		                  <th>Pays</th>
+		                  <th>Enregistré</th>
 		                  <th>Action </th>
 		                </tr>
 		            </thead>

@@ -33,21 +33,21 @@
         <ul class="navbar-nav  mr-auto">
 
           <li class="nav-item active ">
-            <a class="nav-link" href="{{ route('customerslist') }}"><i class="fas fa-users"></i> CUSTOMERS</a>
+            <a class="nav-link" href="{{ route('customerslist') }}"><i class="fas fa-users"></i> CLIENTS</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link " href="{{ route('supplierslist') }}"><i class="fas fa-shipping-fast"></i> SUPPLIERS</a>
+            <a class="nav-link " href="{{ route('supplierslist') }}"><i class="fas fa-shipping-fast"></i> FOURNISSEURS</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link " href="{{ route('invoiceslist') }}"><i class="fas fa-file-invoice"></i> INVOICES</a>
+            <a class="nav-link " href="{{ route('invoiceslist') }}"><i class="fas fa-file-invoice"></i> FACTURES</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link " href="{{ route('productslist') }}"><i class="fas fa-box"></i> PRODUCTS</a>
+            <a class="nav-link " href="{{ route('productslist') }}"><i class="fas fa-box"></i> PRODUITS</a>
           </li>
           </div>
           
         </ul>
-          <a href="{{ route('log.out') }}" class="btn btn-outline-danger my-2 my-sm-0" onclick="return confirm('Vous etez sur déconnecter la session ?')"><i class="fas fa-sign-out-alt"></i> LOGOUT</a>
+          <a href="{{ route('log.out') }}" class="btn btn-outline-danger my-2 my-sm-0" onclick="return confirm('Vous etez sur déconnecter la session ?')"><i class="fas fa-sign-out-alt"></i> DECONNECTION</a>
       </div>
                    <style>
                     body {

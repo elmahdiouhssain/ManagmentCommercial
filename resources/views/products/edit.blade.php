@@ -23,7 +23,7 @@
 		          	<form action="/products/update/<?php echo$data['products'][0]->id; ?>" method="POST">
                         @csrf
                                <div class="form-group">
-                                    <label for="name">Product name : <span style="color:red;">required (*)</span></label>
+                                    <label for="name">Produit : <span style="color:red;">required (*)</span></label>
                                     <input type="text" name="name" class="form-control" id="name"value="<?php echo$data['products'][0]->name; ?>">
                                     @if ($errors->has('name'))
                                     <span style="color: red;">{{ $errors->first('name') }}</span>
@@ -39,7 +39,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="price">Price :</label>
+                                    <label for="price">Prix :</label>
                                     <input type="number" name="price" class="form-control" id="price"value="<?php echo$data['products'][0]->price; ?>">
                                     @if ($errors->has('price'))
                                     <span style="color: red;">{{ $errors->first('price') }}</span>
@@ -47,21 +47,21 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tax">Tax price :</label>
+                                    <label for="tax">Tva prix :</label>
                                     <input type="text" name="tax" class="form-control" id="tax"value="<?php echo$data['products'][0]->tax; ?>">
                                     @if ($errors->has('tax'))
                                     <span style="color: red;">{{ $errors->first('tax') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <strong>Disponiblity (): </strong>
+                                    <strong>Disponiblité (): </strong>
                                     <input type="checkbox" name="is_active" class="switch-input" value="{{$data['products'][0]->is_active}}" {{ $data['products'][0]->is_active == 1 ? 'checked' : null }}/>
                                    
                                 </div>
 
                                 <div class="form-group">
-                                    <button class="btn btn-warning btn-sm btn-block" type="submit"><i class="fas fa-save"></i> Save</button>
-                                    <a href="/products/del/<?php echo$data['products'][0]->id; ?>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sur wanna delete this product')"><i class="fas fa-trash"></i> Delete this product</a>
+                                    <button class="btn btn-warning btn-sm btn-block" type="submit"><i class="fas fa-save"></i> Enregistré</button>
+                                    <a href="/products/del/<?php echo$data['products'][0]->id; ?>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sur wanna delete this product')"><i class="fas fa-trash"></i> Supprimé le produit</a>
 
                                     
                                 </div>

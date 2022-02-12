@@ -23,7 +23,7 @@
 		          	<form action="/customers/update/<?php echo$data['customer'][0]->id; ?>" method="POST">
                         @csrf
                                 <div class="form-group">
-                                    <label for="nom_complete">Full name : <span style="color:red;">required (*)</span></label>
+                                    <label for="nom_complete">Nom complét : <span style="color:red;">required (*)</span></label>
                                     <input type="text" name="nom_complete" class="form-control" id="nom_complete" value="<?php echo$data['customer'][0]->nom_complete; ?>">
                                     @if ($errors->has('nom_complete'))
                                     <span style="color: red;">{{ $errors->first('nom_complete') }}</span>
@@ -47,17 +47,17 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nom_complete">N°Account :</label>
+                                    <label for="nom_complete">N°compte :</label>
                                     <input type="text" name="account_number" class="form-control" id="account_number" value="<?php echo$data['customer'][0]->account_number; ?>">
                                     @if ($errors->has('account_number'))
                                     <span style="color: red;">{{ $errors->first('account_number') }}</span>
                                     @endif
                                 </div>
                                 <center>
-                                <hr>BILLING INFORMATIONS :<hr>
+                                <hr>ADDRESSE INFORMATIONS :<hr>
                                 </center>
                                 <div class="form-group">
-                                    <label for="country">Country :</label>
+                                    <label for="country">Pays :</label>
                                     <input type="text" name="country" class="form-control" id="country" value="<?php echo$data['customer'][0]->country; ?>">
                                     @if ($errors->has('country'))
                                     <span style="color: red;">{{ $errors->first('country') }}</span>
@@ -65,7 +65,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nom_complete">City :</label>
+                                    <label for="nom_complete">Ville :</label>
                                     <input type="text" name="city" class="form-control" id="city" value="<?php echo$data['customer'][0]->city; ?>">
                                     @if ($errors->has('city'))
                                     <span style="color: red;">{{ $errors->first('city') }}</span>
@@ -73,7 +73,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nom_complete">Zip code :</label>
+                                    <label for="nom_complete">Code postal :</label>
                                     <input type="text" name="zipcode" class="form-control" id="zipcode" value="<?php echo$data['customer'][0]->zipcode; ?>">
                                     @if ($errors->has('zipcode'))
                                     <span style="color: red;">{{ $errors->first('zipcode') }}</span>
@@ -81,7 +81,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nom_complete">Province :</label>
+                                    <label for="nom_complete">Region :</label>
                                     <input type="text" name="province" class="form-control" id="province" value="<?php echo$data['customer'][0]->province; ?>">
                                     @if ($errors->has('province'))
                                     <span style="color: red;">{{ $errors->first('province') }}</span>
@@ -113,7 +113,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="currency">Currency :</label>
+                                    <label for="currency">Devis :</label>
                                     <select class="form-control" name="currency">
                                         <option selected ><?php echo$data['customer'][0]->currency; ?></option>
                                     	<option>DOLLAR (USD)</option>
@@ -125,8 +125,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <button class="btn btn-warning btn-sm btn-block" type="submit"><i class="fas fa-save"></i> Save</button>
-                                    <a href="/customers/del/<?php echo$data['customer'][0]->id; ?>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sur wanna delete this supplier')"><i class="fas fa-trash"></i> Delete this supplier</a>
+                                    <button class="btn btn-warning btn-sm btn-block" type="submit"><i class="fas fa-save"></i> Enregistré</button>
+                                    <a href="/customers/del/<?php echo$data['customer'][0]->id; ?>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sur wanna delete this supplier')"><i class="fas fa-trash"></i> Supprimé le client</a>
 
                                 </div>
                             </form>

@@ -59,7 +59,7 @@ class CustomersController extends Controller
         $post->note = $request->input('note');
 
         $post->save();
-        return redirect('/customers')->with('success', 'Customer saved secussfuly');
+        return redirect('/customers')->with('success', 'Client enregistré avec succée');
         }
 
 
@@ -89,14 +89,14 @@ class CustomersController extends Controller
 
             DB::update('update customers set nom_complete=?,email=?,tele=?,currency=?,addr1=?,addr2=?,city=?,zipcode=?,country=?,province=?,account_number=?,fax=?,mobile=?,website=?,note=? where id = ?',[$nom_complete,$email,$tele,$currency,$addr1,$addr2,$city,$zipcode,$country,$province,$account_number,$fax,$mobile,$website,$note,$id]);
 
-            return redirect('/customers')->with('success', 'Customer updated successfuly !');
+            return redirect('/customers')->with('success', 'Client modifié avec succée !');
 
         }
 
         public function destroy($id) {
             $customer = Customers::find($id);
             $customer->delete();
-            return redirect('/customers')->with('success', 'Customer deleted successfuly !');
+            return redirect('/customers')->with('success', 'Client modifié avec succée !');
 
         }
 

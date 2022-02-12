@@ -62,7 +62,7 @@ class InvoiceController extends Controller
         $post->total_ttc = $request->input('total_ttc');
         $post->release_from = \Auth::User()->name;   
         $post->save();
-        return redirect('/invoices')->with('success', 'Product saved successfuly !');
+        return redirect('/invoices')->with('success', 'Produit enregistré avec succée !');
         }
 
 

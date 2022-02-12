@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col">
                                 <div class="form-group">
-                                    <label for="customer_id">Customer :</label>
+                                    <label for="customer_id">Client :</label>
                                     <select class="form-control" name="customer_name" id="customer_name">
                                         @foreach ($data['customers'] as $customer)
                                         <option value="{{ $customer->nom_complete }}">{{ $customer->nom_complete }}</option>
@@ -36,7 +36,7 @@
                                 </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="supplier_id">Supplier :</label>
+                                    <label for="supplier_id">Fournisseur :</label>
                                     <select class="form-control" name="supplier_name" id="supplier_name">
                                         @foreach ($data['suppliers'] as $supplier)
                                         <option value="{{ $supplier->vendor_name }}">{{ $supplier->vendor_name }}</option>
@@ -56,7 +56,7 @@
               <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                  <h4 class="modal-title"><i class="fas fa-box"></i> Add new product to invoice</h4>
+                  <h4 class="modal-title"><i class="fas fa-box"></i> Ajouté un nouveau produit</h4>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal body -->
@@ -64,7 +64,7 @@
                     <div class="container">
                         <center>@include('flash-message')</center>
                     <div class="form-group">
-                        <label>Product : </label>
+                        <label>Produit : </label>
                         <select class="designation form-control" name="designation" id="designation">
                         @foreach ($data['products'] as $product)
                         <option value="{{ $product->id }}">{{ $product->name }}</option>
@@ -87,7 +87,7 @@
                         <input type="number" id="qte" name="qte" placeholder="Quantity" class="qte form-control" />
                     </div>
                     <div class="form-group">
-                        <label>Price : </label>
+                        <label>Prix : </label>
                         <input  type=number step=any id="p_u" name="p_u" placeholder="Price U" class="p_u form-control" />
                     </div>
                     <script>function findTotal() {
@@ -103,14 +103,14 @@
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-success btn-sm btn-block add_prod_invoice" id="add_prod_invoice" name="add_prod_invoice">ADD</button>
+                        <button class="btn btn-success btn-sm btn-block add_prod_invoice" id="add_prod_invoice" name="add_prod_invoice">Ajouté</button>
                     </div>
 
                 </div>
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Quitté</button>
                 </div>
                 
               </div>
@@ -122,13 +122,13 @@
           <table class="table table-bordered" id="dynamicAddRemove">
 
                 <br><tr>
-                    <th>Product :</th>
+                    <th>Produit :</th>
                     <th>U :</th>
                     <th>Qte :</th>
-                    <th>Price :</th>
+                    <th>Prix :</th>
                     <th>Total :</th>
-                    <button type="button" name="add" id="dynamic-ar" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i> New Product</button>
-                    <a href="" class="btn btn-success btn-sm btn-block"><i class="fas fa-eye"></i> Save & Preview</a>
+                    <button type="button" name="add" id="dynamic-ar" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i> Nouveau produit</button>
+                    <a href="" class="btn btn-success btn-sm btn-block"><i class="fas fa-eye"></i> Enregistré et testé</a>
                     <br><center>@include('flash-message')</center><br>
                 </tr>
                 <tr>
@@ -146,20 +146,20 @@
                                         <div class="form-group">
                                     <label for="total_tva">Status :</label>
                                     <select class="form-control" id="is_paid" name="is_paid">
-                                        <option value="1" class="badge badge-success">PAID</label></option>
-                                        <option value="0" class="badge badge-warning">UNPAID</label></option>
+                                        <option value="1" class="badge badge-success">Payé</label></option>
+                                        <option value="0" class="badge badge-warning">NonPayé</label></option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="total_ht">Released from :</label>
+                                    <label for="total_ht">Facturé par :</label>
                                     <input readonly type=text step=any name="user_name" class="form-control" id="user_name" value="{{Auth::user()->name}}">
 
                                 </div>
                                     </div>
                                 <div class="col">
                                 <div class="form-group">
-                                    <label for="total_ht">Total price :</label>
+                                    <label for="total_ht">Total prix :</label>
                                     <input readonly type=number step=any name="total_ht" class="form-control" id="total_ht" required="">
                                     @if ($errors->has('total_ht'))
                                     <span style="color: red;">{{ $errors->first('total_ht') }}</span>
@@ -167,7 +167,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="total_tva">Tax price :</label>
+                                    <label for="total_tva">Tva prix :</label>
                                     <input readonly type=number step=any name="total_tva" class="form-control" id="total_tva"required="">
                                     @if ($errors->has('total_tva'))
                                     <span style="color: red;">{{ $errors->first('total_tva') }}</span>
@@ -177,7 +177,7 @@
                                  </div>
                             </div>
                                 <div class="form-group">
-                                    <button class="btn btn-danger btn-sm btn-block" type="submit"><i class="fas fa-save"></i> Save</button>
+                                    <button class="btn btn-danger btn-sm btn-block" type="submit"><i class="fas fa-save"></i> Enregistré</button>
                                 </div>
             </div>
             <script>
@@ -232,7 +232,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <center><i class="fas fa-box fa-7x" style="color:green;"></i><br>
-                            <h2  style="color:green;">Product Saved !</h2>
+                            <h2  style="color:green;">Produit Enregistré !</h2>
                         </center>
                     </div>
   
