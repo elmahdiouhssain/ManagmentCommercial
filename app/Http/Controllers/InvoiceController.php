@@ -24,9 +24,10 @@ class InvoiceController extends Controller
         return view('invoices.index',compact('data'));
     }
 
-    public function InvoicesProductShowAjax() {
+    public function InvoicesProductShowAjax(Request $request, $invoice_id) {
         $data['title'] = "Invoices list";
-        $data['invoicesprod'] = ProductsInvoice::all();
+        //$invoice_id = 
+        $data['invoicesprod'] = DB::select('select * from products_invoices where invoice_id ='.$invoice_id);
         return response()->json($data['invoicesprod']);
     }
 
@@ -65,7 +66,6 @@ class InvoiceController extends Controller
             'user_name' => 'required',
             'supplier_name' => 'required',
         ]);
-            
         $post = new Invoices();
         $post->customer_name = $request->input('customer_name');
         $post->supplier_name = $request->input('supplier_name');
@@ -81,6 +81,14 @@ class InvoiceController extends Controller
     {
         $data['invoice'] = Invoices::find($invoice_id);
         $data['products'] = Products::all();
+        $data['products_invoice'] = DB::select('select * from products_invoices where invoice_id ='.$invoice_id);
+        return view('invoices.show',compact('data'));
+    }
+
+    public function showPDF($invoice_id)
+    {
+        $data['invoice'] = DB::select('select * from invoices where id ='.$invoice_id);
+        $data['products'] = DB::select('select * from products_invoices where invoice_id ='.$invoice_id);
         return view('invoices.show',compact('data'));
     }
 

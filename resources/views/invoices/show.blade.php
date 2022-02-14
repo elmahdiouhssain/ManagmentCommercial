@@ -160,10 +160,14 @@
             <script>
               $(document).ready(function (){
                 fetchinvprod();
+
                 function fetchinvprod(){
+                    var full_url_invoice = document.URL;
+                    var idofinvoicee = full_url_invoice.substring(full_url_invoice.lastIndexOf('/') + 1);
+                    //console.log(idofinvoicee);
                     $.ajax({
                         type:"GET",
-                        url:"/invoicesprod/json",
+                        url:"/invoicesprod/json/"+idofinvoicee,
                         dataType:"json",
                         success:function (response){
                             //console.log(response);
@@ -178,6 +182,18 @@
                                     <td><input readonly type="text" id="p_t" name="p_t" class="form-control" value="'+item.p_t+'"/></td>\
                                     <td><a class="fas fa-trash" style="color:red;" href="/invoices/prod/del/'+item.id+'" data-toggle="modal" data-target="#myModal3"></a><input type="hidden" name="prod_invoice_id" id="prod_invoice_id" value="'+item.id+'" ">\
                                     </td></tr>');
+
+                                function findTotalInvoice(){
+                                    var arr = document.getElementsByName('p_t');
+                                    var tot=0;
+                                    for(var i=0;i<arr.length;i++){
+                                        if(parseInt(arr[i].value))
+                                            tot += parseInt(arr[i].value);
+                                    }
+                                    console.log(tot);
+                                    //document.getElementById('total').value = tot;
+                                }
+
                            });
                     }
                 });
@@ -200,6 +216,7 @@
                     $.ajax({
                         type:"DELETE",
                         url:"/invoices/prod/del/"+prod_id,
+                        data: {prod_id:prod_id},
                         success: function (response){
                             console.log(response);
                             $('#success_message').addClass('alert alert-success')
