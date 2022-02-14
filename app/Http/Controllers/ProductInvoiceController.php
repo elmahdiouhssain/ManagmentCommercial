@@ -42,7 +42,10 @@ class ProductInvoiceController extends Controller
     public function destroy($id) {
             $product = ProductsInvoice::find($id);
             $product->delete();
-            return back()->with('success', 'Produit supprimé avec succée !');
+            return response()->json([
+                'status'=>200,
+                'message'=>"Produit supprimé avec succée !",
+            ]);
 
         }
 

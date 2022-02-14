@@ -67,6 +67,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/invoices/store/product', [ProductInvoiceController::class, 'storeProdforInvoice'])->name('storeprodforinvoice');
     Route::get('/invoices/del/{id}', [InvoiceController::class, 'destroy'])->name('delinvoice');
 
+    Route::delete('/invoices/prod/del/{id}', [ProductInvoiceController::class, 'destroy'])->name('delinvoiceprod');
+
     
     
     Route::get('/logout', [DashboardController::class, 'logout'])->name('log.out');

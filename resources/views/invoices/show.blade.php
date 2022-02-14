@@ -176,7 +176,7 @@
                                     <td><input readonly type="number" id="qte" name="qte" class="form-control" value="'+item.qte+'" /></td>\
                                     <td><input readonly type="text" id="p_u" name="p_u" class="form-control" value="'+item.p_u+'"/></td>\
                                     <td><input readonly type="text" id="p_t" name="p_t" class="form-control" value="'+item.p_t+'"/></td>\
-                                    <td><a href=""></a><i class="fas fa-trash" style="color:red;"></i>\
+                                    <td><a class="fas fa-trash" style="color:red;" href="/invoices/prod/del/'+item.id+'" data-toggle="modal" data-target="#myModal3"></a><input type="hidden" name="prod_invoice_id" id="prod_invoice_id" value="'+item.id+'" ">\
                                     </td></tr>');
                            });
                     }
@@ -186,9 +186,29 @@
                     e.preventDefault();
                     var prod_id = $(this).val();
                     $('#delete_prod_id').val(prod_id);
-                    $('#DeleteProdModal').modal('show');
+                    $('#myModal3').modal('show');
 
                 });
+                $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                $(document).on('click', '.delete_prod_btn', function(e){
+                    e.preventDefault();
+                    var prod_id = $('#prod_invoice_id').val();
+                    $.ajax({
+                        type:"DELETE",
+                        url:"/invoices/prod/del/"+prod_id,
+                        success: function (response){
+                            console.log(response);
+                            $('#success_message').addClass('alert alert-success')
+                            $('#success_message').text(response.message);
+                            $('#myModal3').modal('hide');
+                            fetchinvprod();
+                        }
+                    })
+                })
                 $(document).on('click', '.add_prod_invoice', function (e){
                     e.preventDefault();
                     var full_url = document.URL;
@@ -252,6 +272,27 @@
                         </center>
                     </div>
   
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- The Modal -->
+          <div class="modal fade" id="myModal3">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <center><i class="fas fa-trash fa-7x" style="color:red;"></i><br>
+
+                            <h2  style="color:red;">Vois etes sur supprimé le produit de cette facture !</h2>
+                        </center>
+                    </div>
+              </div>
+
+              <div class="modal-footer">
+                  <button class="delete_prod_btn btn btn-danger">YES</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
               </div>
             </div>
           </div>
