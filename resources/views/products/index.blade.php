@@ -100,7 +100,7 @@
 
                                 <div class="form-group">
                                     <label for="price">Prix :</label>
-                                    <input type="number" name="price" class="form-control" id="price"required="">
+                                    <input type=number step=any name="price" class="form-control" id="price"required="">
                                     @if ($errors->has('price'))
                                     <span style="color: red;">{{ $errors->first('price') }}</span>
                                     @endif
@@ -108,7 +108,7 @@
 
                                 <div class="form-group">
                                     <label for="tax">Tva prix :</label>
-                                    <input type="text" name="tax" class="form-control" id="tax"required="">
+                                    <input type="text" type=number step=any class="form-control" id="tax"required="">
                                     @if ($errors->has('tax'))
                                     <span style="color: red;">{{ $errors->first('tax') }}</span>
                                     @endif

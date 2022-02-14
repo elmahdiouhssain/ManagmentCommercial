@@ -26,8 +26,8 @@ class InvoiceController extends Controller
 
     public function InvoicesProductShowAjax() {
         $data['title'] = "Invoices list";
-        $data['invoicesprod'] = ProductsInvoice::latest()->get();
-        return response()->json(['ginvoices'=>$data['invoicesprod'],]);
+        $data['invoicesprod'] = ProductsInvoice::all();
+        return response()->json($data['invoicesprod']);
     }
 
     public function InvoicesShowAjax(Request $request){
@@ -72,18 +72,24 @@ class InvoiceController extends Controller
         $post->is_paid = $request->input('is_paid');
         $post->user_name = \Auth::User()->name;
         $post->relase_date = date('Y-m-d H:i:s');
-        $invoice_id = $post->save();
-        
-        //dd($post->id);
-        return redirect()->route('showinvoice',$invoice_id)->with('success', 'Etape2 : selection du produits ');
+        $post->save();
+        $invoice_id = $post->id;
+        return redirect('/invoices/'.$invoice_id)->with('success', 'Etape2 : selection du produits ');
         }
 
-    public function show($id)
+    public function show($invoice_id)
     {
-        $data['invoice'] = Invoices::find($id);
+        $data['invoice'] = Invoices::find($invoice_id);
         $data['products'] = Products::all();
         return view('invoices.show',compact('data'));
     }
+
+    public function destroy($id) {
+            $invoice = Invoices::find($id);
+            $invoice->delete();
+            return back()->with('success', 'Facture supprimé avec succée');
+
+        }
 
 
 }

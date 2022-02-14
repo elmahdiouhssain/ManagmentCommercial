@@ -18,6 +18,7 @@ class ProductInvoiceController extends Controller
     public function storeProdforInvoice(Request $request)
         {
             $this->validate($request, [
+                'invoice_id' => 'required',
                 'designation' => 'required',
                 'uml' => 'required',
                 'qte' => 'required',
@@ -25,7 +26,7 @@ class ProductInvoiceController extends Controller
                 'p_t' => 'required',
             ]);
             $prod = new ProductsInvoice();
-            $prod->invoice_id = "550";
+            $prod->invoice_id = $request->get('invoice_id');
             $prod->designation = $request->input('designation');
             $prod->uml = $request->input('uml');
             $prod->qte = $request->input('qte');
@@ -41,7 +42,7 @@ class ProductInvoiceController extends Controller
     public function destroy($id) {
             $product = ProductsInvoice::find($id);
             $product->delete();
-            return back()->with('success', 'Product supprimé avec succée !');
+            return back()->with('success', 'Produit supprimé avec succée !');
 
         }
 

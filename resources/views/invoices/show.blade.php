@@ -62,6 +62,7 @@
                     <div class="form-group">
                         <label>Produit : </label>
                         <select class="designation form-control" name="designation" id="designation">
+                            <option selected value="0">--Selectionner un produit--</option>
                         @foreach ($data['products'] as $product)
                         <option value="{{ $product->name }}">{{ $product->name }}</option>
                         @endforeach
@@ -70,7 +71,7 @@
                     <div class="form-group">
                         <label>Unit : </label>
                         <select class="uml form-control" id="uml" name="uml">
-                   
+                        
                         <option value="U">U</option>
                         <option value="L">L</option>
                         <option value="ML">ML</option>
@@ -114,10 +115,10 @@
           </div>
           
 
-          <div class="card">
-          <table class="table table-bordered" id="dynamicAddRemove">
-
-                <br><tr>
+          <div class="card"><br>
+          <table class="table table-bordered table-striped" >
+                <thead>
+                <tr>
                     <th>Produit :</th>
                     <th>U :</th>
                     <th>Qte :</th>
@@ -127,15 +128,11 @@
                     <a href="" class="btn btn-success btn-sm btn-block"><i class="fas fa-eye"></i> Enregistré et testé</a>
                     <br><center>@include('flash-message')</center><br>
                 </tr>
-                
-                    <tbody>
-                        
-                    </tbody>
-                    </table>
+                </thead>
+                <tbody></tbody>
+                  </table>
                     <div class="row">
-                                    <div class="col">
-                                        
-
+                            <div class="col">
                                 <div class="form-group">
                                     <label for="total_ht">Facturé par :</label>
                                     <input readonly type=text step=any name="user_name" class="form-control" id="user_name" value="{{Auth::user()->name}}">
@@ -146,19 +143,13 @@
                                 <div class="col">
                                 <div class="form-group">
                                     <label for="total_ht">Total prix :</label>
-                                    <input  type=number step=any name="total_ht" class="form-control" id="total_ht" required="">
+                                    <input readonly type=number step=any name="total_ht" class="form-control" id="total_ht" required="">
                                     @if ($errors->has('total_ht'))
                                     <span style="color: red;">{{ $errors->first('total_ht') }}</span>
                                     @endif
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="total_tva">Tva prix :</label>
-                                    <input readonly type=number step=any name="total_tva" class="form-control" id="total_tva"required="">
-                                    @if ($errors->has('total_tva'))
-                                    <span style="color: red;">{{ $errors->first('total_tva') }}</span>
-                                    @endif
-                                </div>
+                              
 
                                  </div>
                             </div>
@@ -176,37 +167,35 @@
                         dataType:"json",
                         success:function (response){
                             //console.log(response);
-                            $('tbody').html();
-                            $.each(response.ginvoices, function(key, item){
+                            $('tbody').html("");
+                            $.each(response, function(key, item){
+                                
                                 $('tbody').append('<tr>\
-                                    <td>\
-                                    <input readonly type="text" id="designation" name="designation" value="'+item.designation+'" class="form-control" />\
-                                    </td>\
-                                    <td>\
-                                    <input readonly type="text" id="uml" name="uml" value="'+item.uml+'" class="form-control" />\
-                                    </td>\
-                                    <td>\
-                                    \
-                                    <input readonly type="number" id="qte" name="qte" class="form-control" value="'+item.qte+'" />\
-                                    </td>\
-                                    <td>\
-                                    <input readonly type="text" id="p_u" name="p_u" class="form-control" value="'+item.p_u+'"/>\
-                                    </td>\
-                                    <td>\
-                                    <input readonly type="text" id="p_t" name="p_t" class="form-control" value="'+item.p_t+'"/>\
-                                    </td>\
-                                    \
-                                    <td>\
-                                    <a href=""></a><i class="fas fa-trash" style="color:red;"></i>\
-                                    </td>\
-                                    </tr>');
+                                    <td><input readonly type="text" id="designation" name="designation" value="'+item.designation+'" class="form-control" /></td>\
+                                    <td><input readonly type="text" id="uml" name="uml" value="'+item.uml+'" class="form-control" /></td>\
+                                    <td><input readonly type="number" id="qte" name="qte" class="form-control" value="'+item.qte+'" /></td>\
+                                    <td><input readonly type="text" id="p_u" name="p_u" class="form-control" value="'+item.p_u+'"/></td>\
+                                    <td><input readonly type="text" id="p_t" name="p_t" class="form-control" value="'+item.p_t+'"/></td>\
+                                    <td><a href=""></a><i class="fas fa-trash" style="color:red;"></i>\
+                                    </td></tr>');
                            });
                     }
                 });
                 }
+                $(document).on('click', '.delete_prod', function(e){
+                    e.preventDefault();
+                    var prod_id = $(this).val();
+                    $('#delete_prod_id').val(prod_id);
+                    $('#DeleteProdModal').modal('show');
+
+                });
                 $(document).on('click', '.add_prod_invoice', function (e){
                     e.preventDefault();
+                    var full_url = document.URL;
+                    var idofinvoice = full_url.substring(full_url.lastIndexOf('/') + 1);
+                    //console.log(idofinvoice);
                     var data = {
+                        'invoice_id':idofinvoice,
                         'designation':$('.designation').val(),
                         'uml':$('.uml').val(),
                         'qte':$('.qte').val(),
@@ -225,7 +214,7 @@
                         data:data,
                         dataType:"json",
                         success:function (response){
-                            console.log(response);
+                            //console.log(response);
                             if(response.status == 400){
                                 $('#savedform_errList').html("");
                                 $('#savedform_errList').addClass('alert alert-danger');
@@ -238,6 +227,11 @@
                                 $('#success_message').text(response.message);
                                 $('#myModal').modal('hide');
                                 $('#myModal2').modal('show');
+                                $("#uml").val("");
+                                $("#qte").val("");
+                                $("#p_u").val("");
+                                $("#p_t").val("");
+                                fetchinvprod();
 
                             }
                         }
