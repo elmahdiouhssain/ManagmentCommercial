@@ -57,8 +57,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/invoices', [InvoiceController::class, 'InvoicesShow'])->name('invoiceslist');
     //////This is just a test for loading datas customers using ajax /////
     Route::get('/invoices/ajax', [InvoiceController::class, 'InvoicesShowAjax'])->name('invoices');
+    Route::get('/invoices/create/step1', [InvoiceController::class, 'createStep1'])->name('createstep1');
     Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('createinvoices');
     Route::post('/invoices/store', [InvoiceController::class, 'store'])->name('storeinvoice');
+    Route::get('/invoices/{id}', [InvoiceController::class, 'show'])->name('showinvoice');
+
+    Route::get('/invoicesprod/json', [InvoiceController::class, 'InvoicesProductShowAjax'])->name('invoiceprod');
     
     Route::post('/invoices/store/product', [ProductInvoiceController::class, 'storeProdforInvoice'])->name('storeprodforinvoice');
 

@@ -32,12 +32,12 @@
                                                 'csvHtml5',
                                                 'pdfHtml5'],
                                                     columns: [
-                                                    {data: "customer_id", className: 'customer_id'},
+                                                    {data: "customer_name", className: 'customer_name'},
                                                     {data: "relase_date", className: 'relase_date'},
                                                     {data: "total_ht", className: 'total_ht'},
                                                     {data: "is_paid", className: 'is_paid'},
-                                                    {data: "supplier_id", className: 'supplier_id'},
-                                                    {data: "release_from", className: 'release_from'},
+                                                    {data: "supplier_name", className: 'supplier_name'},
+                                                    {data: "user_name", className: 'user_name'},
                                                     {data: "created_at", className: 'created_at'},
                                                     {
                                                     data: 'action', 
@@ -65,7 +65,7 @@
                         </div>
                     </div>
     		<center>
-    		<a href="{{ route('createinvoices') }}" class="btn btn-danger" >
+    		<a href="{{ route('createstep1') }}" class="btn btn-danger" >
         		<i class="fas fa-file-invoice"></i> Nouvelle facture
       		</a><br>
       		@include('flash-message')

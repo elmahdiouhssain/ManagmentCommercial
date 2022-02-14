@@ -10,6 +10,9 @@ use App\Models\Customers;
 use App\Models\Suppliers;
 use App\Models\Products;
 use App\Models\Invoices;
+use App\Models\ProductsInvoice;
+
+
 use DataTables;
 
 class InvoiceController extends Controller
@@ -19,6 +22,12 @@ class InvoiceController extends Controller
         $data['title'] = "Invoices list";
         $data['invoices'] = Invoices::latest()->get();
         return view('invoices.index',compact('data'));
+    }
+
+    public function InvoicesProductShowAjax() {
+        $data['title'] = "Invoices list";
+        $data['invoicesprod'] = ProductsInvoice::latest()->get();
+        return response()->json(['ginvoices'=>$data['invoicesprod'],]);
     }
 
     public function InvoicesShowAjax(Request $request){
@@ -36,6 +45,12 @@ class InvoiceController extends Controller
         }
     }
 
+    public function createStep1(){
+        $data['customers'] = Customers::latest()->get();
+        $data['suppliers'] = Suppliers::latest()->get();
+        return view('invoices.create2',compact('data'));
+    }
+
     public function create(){
         $data['customers'] = Customers::latest()->get();
         $data['suppliers'] = Suppliers::latest()->get();
@@ -46,24 +61,29 @@ class InvoiceController extends Controller
     public function store(Request $request)
         {
             $this->validate($request, [
-            'customer_id' => 'required',
-            'user_id' => 'required',
-            'supplier_id' => 'required',
+            'customer_name' => 'required',
+            'user_name' => 'required',
+            'supplier_name' => 'required',
         ]);
             
         $post = new Invoices();
-        $post->customer_id = $request->input('name');
-        $post->user_id = $request->input('user_id');
-        $post->supplier_id = $request->input('supplie_r_id');
-        $post->relase_date = date("d-m-Y");
-        $post->pdf_url = $request->input('pdf_url');
-        $post->total_ht = $request->input('total_ht');
-        $post->total_tva = $request->input('total_tva');
-        $post->total_ttc = $request->input('total_ttc');
-        $post->release_from = \Auth::User()->name;   
-        $post->save();
-        return redirect('/invoices')->with('success', 'Produit enregistré avec succée !');
+        $post->customer_name = $request->input('customer_name');
+        $post->supplier_name = $request->input('supplier_name');
+        $post->is_paid = $request->input('is_paid');
+        $post->user_name = \Auth::User()->name;
+        $post->relase_date = date('Y-m-d H:i:s');
+        $invoice_id = $post->save();
+        
+        //dd($post->id);
+        return redirect()->route('showinvoice',$invoice_id)->with('success', 'Etape2 : selection du produits ');
         }
+
+    public function show($id)
+    {
+        $data['invoice'] = Invoices::find($id);
+        $data['products'] = Products::all();
+        return view('invoices.show',compact('data'));
+    }
 
 
 }
