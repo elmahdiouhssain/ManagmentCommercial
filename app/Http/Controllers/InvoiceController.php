@@ -38,7 +38,8 @@ class InvoiceController extends Controller
             return Datatables::of($invoices)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = "<a href='/invoices/edit/$row->id' class='btn btn-dark btn-sm'><i class='fas fa-cog'></i></a> <a href='/invoices/del/$row->id' class='btn btn-danger btn-sm'><i class='fas fa-trash'></i></a>";
+                    $actionBtn = "<a href='/invoices/$row->id' class='btn btn-dark btn-sm'><i class='fas fa-cog'></i></a> <a href='/invoices/pdf/$row->id' class='btn btn-primary btn-sm'><i class='fas fa-eye'></i></a> <a href='' class='btn btn-success btn-sm'><i class='fas fa-save'></i></a>";
+
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -77,6 +78,21 @@ class InvoiceController extends Controller
         return redirect('/invoices/'.$invoice_id)->with('success', 'Etape2 : selection du produits ');
         }
 
+    public function storeTOTAL(Request $request)
+        {
+            $this->validate($request, [
+            'total_ht' => 'required',
+
+        ]);
+
+        $post->total_ht = $request->input('customer_name');
+        $post->user_name = \Auth::User()->name;
+        $post->relase_date = date('Y-m-d H:i:s');
+        $post->save();
+
+        return redirect('/invoices/'.$invoice_id)->with('success', 'Facture géneré avec succée');
+        }
+
     public function show($invoice_id)
     {
         $data['invoice'] = Invoices::find($invoice_id);
@@ -87,15 +103,15 @@ class InvoiceController extends Controller
 
     public function showPDF($invoice_id)
     {
-        $data['invoice'] = DB::select('select * from invoices where id ='.$invoice_id);
+        $data['invoice'] = Invoices::find($invoice_id);
         $data['products'] = DB::select('select * from products_invoices where invoice_id ='.$invoice_id);
-        return view('invoices.show',compact('data'));
+        return view('invoices.pdf',compact('data'));
     }
 
     public function destroy($id) {
             $invoice = Invoices::find($id);
             $invoice->delete();
-            return back()->with('success', 'Facture supprimé avec succée');
+            return redirect('/invoices')->with('success', 'Facture supprimé avec succée');
 
         }
 

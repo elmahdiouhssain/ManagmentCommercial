@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::delete('/invoices/prod/del/{id}', [ProductInvoiceController::class, 'destroy'])->name('delinvoiceprod');
 
     
+    Route::get('/invoices/pdf/{id}', [InvoiceController::class, 'showPDF'])->name('showpdf');
     
     Route::get('/logout', [DashboardController::class, 'logout'])->name('log.out');
 });

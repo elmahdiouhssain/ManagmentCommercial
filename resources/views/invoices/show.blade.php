@@ -71,12 +71,10 @@
                     <div class="form-group">
                         <label>Unit : </label>
                         <select class="uml form-control" id="uml" name="uml">
-                        
                         <option value="U">U</option>
                         <option value="L">L</option>
                         <option value="ML">ML</option>
                         <option value="H">H</option>
-                       
                         </select>
                     </div>
                     <div class="form-group">
@@ -125,7 +123,8 @@
                     <th>Prix :</th>
                     <th>Total :</th>
                     <button type="button" name="add" id="dynamic-ar" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i> Nouveau produit</button>
-                    <a href="" class="btn btn-success btn-sm btn-block"><i class="fas fa-eye"></i> Enregistré et testé</a>
+
+                    <a href="{{ route('delinvoice',$data['invoice']->id) }}" onclick="return confirm('Vous etes-sur supprimé la facture !')" class="btn btn-warning btn-sm btn-block"><i class="fas fa-trash"></i> Supprimé la facture</a>
                     <br><center>@include('flash-message')</center><br>
                 </tr>
                 </thead>
@@ -143,7 +142,7 @@
                                 <div class="col">
                                 <div class="form-group">
                                     <label for="total_ht">Total prix :</label>
-                                    <input readonly type=number step=any name="total_ht" class="form-control" id="total_ht" required="">
+                                    <input readonly  type=number step=any name="total_ht" class="total_ht form-control" id="total_ht" required="">
                                     @if ($errors->has('total_ht'))
                                     <span style="color: red;">{{ $errors->first('total_ht') }}</span>
                                     @endif
@@ -156,7 +155,8 @@
                                 <div class="form-group">
                                     <button class="btn btn-danger btn-sm btn-block" type="submit"><i class="fas fa-save"></i> Enregistré</button>
                                 </div>
-            </div>
+                        </div>
+            
             <script>
               $(document).ready(function (){
                 fetchinvprod();
@@ -172,32 +172,23 @@
                         success:function (response){
                             //console.log(response);
                             $('tbody').html("");
+                            var i = 0;
                             $.each(response, function(key, item){
-                                
+                                ++i;
                                 $('tbody').append('<tr>\
                                     <td><input readonly type="text" id="designation" name="designation" value="'+item.designation+'" class="form-control" /></td>\
                                     <td><input readonly type="text" id="uml" name="uml" value="'+item.uml+'" class="form-control" /></td>\
                                     <td><input readonly type="number" id="qte" name="qte" class="form-control" value="'+item.qte+'" /></td>\
                                     <td><input readonly type="text" id="p_u" name="p_u" class="form-control" value="'+item.p_u+'"/></td>\
-                                    <td><input readonly type="text" id="p_t" name="p_t" class="form-control" value="'+item.p_t+'"/></td>\
+                                    <td><input readonly type="text" id="p_t[]" name="p_t[]" class="form-control" value="'+item.p_t+'"/></td>\
                                     <td><a class="fas fa-trash" style="color:red;" href="/invoices/prod/del/'+item.id+'" data-toggle="modal" data-target="#myModal3"></a><input type="hidden" name="prod_invoice_id" id="prod_invoice_id" value="'+item.id+'" ">\
                                     </td></tr>');
-
-                                function findTotalInvoice(){
-                                    var arr = document.getElementsByName('p_t');
-                                    var tot=0;
-                                    for(var i=0;i<arr.length;i++){
-                                        if(parseInt(arr[i].value))
-                                            tot += parseInt(arr[i].value);
-                                    }
-                                    console.log(tot);
-                                    //document.getElementById('total').value = tot;
-                                }
-
                            });
                     }
                 });
                 }
+
+                            
                 $(document).on('click', '.delete_prod', function(e){
                     e.preventDefault();
                     var prod_id = $(this).val();
