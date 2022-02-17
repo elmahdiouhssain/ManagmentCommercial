@@ -21,6 +21,7 @@
                                                         }
                                                     }
                                                 },
+                                                
                                                 buttons: true,
                                                 searching: true,
                                                 scrollY: 500,
@@ -35,7 +36,17 @@
                                                     {data: "customer_name", className: 'customer_name'},
                                                     {data: "relase_date", className: 'relase_date'},
                                                     {data: "total_ht", className: 'total_ht'},
-                                                    {data: "is_paid", className: 'is_paid'},
+                                                    {data: "is_paid",
+                                                        render : function(data,type,row){
+                                                            var label;
+                                                            if(data == "1"){
+                                                                return '<label class="badge badge-success">PAYE</label>'
+                                                            }else{
+                                                                return '<label class="badge badge-danger">NONPAYE</label>'
+                                                            }
+                                                        },
+                                                     className: 'is_paid'},
+
                                                     {data: "supplier_name", className: 'supplier_name'},
                                                     {data: "user_name", className: 'user_name'},
                                                     {data: "created_at", className: 'created_at'},

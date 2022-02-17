@@ -25,7 +25,7 @@ class InvoiceController extends Controller
     }
 
     public function InvoicesProductShowAjax(Request $request, $invoice_id) {
-        $data['title'] = "Invoices list";
+        $data['title'] = "Invoices list ajax";
         //$invoice_id = 
         $data['invoicesprod'] = DB::select('select * from products_invoices where invoice_id ='.$invoice_id);
         return response()->json($data['invoicesprod']);
@@ -38,7 +38,7 @@ class InvoiceController extends Controller
             return Datatables::of($invoices)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = "<a href='/invoices/$row->id' class='btn btn-dark btn-sm'><i class='fas fa-cog'></i></a> <a href='/invoices/pdf/$row->id' class='btn btn-primary btn-sm'><i class='fas fa-eye'></i></a> <a href='' class='btn btn-success btn-sm'><i class='fas fa-save'></i></a>";
+                    $actionBtn = "<a href='/invoices/$row->id' class='btn btn-dark btn-sm'><i class='fas fa-cog'></i></a> <a href='/invoices/pdf/$row->id' target='_blank' class='btn btn-primary btn-sm'><i class='fas fa-eye'></i></a> <a href='' class='btn btn-success btn-sm'><i class='fas fa-save'></i></a>";
 
                     return $actionBtn;
                 })

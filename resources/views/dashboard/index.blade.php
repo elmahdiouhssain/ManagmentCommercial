@@ -11,8 +11,8 @@
                 	<p class="text-uppercase mar-btm text-sm">Clients</p>
                 	<i class="fa fa-users fa-5x"></i>
                 	<hr>
-                	<p class="h2 text-thin">254,487</p>
-                	<small><span class="text-semibold">7%</span> Higher than yesterday</small>
+                	<p class="h2 text-thin">{{$data['c_count']}}</p>
+                	<small><span class="text-semibold">{{ $data['admin_count'] }}</span> Administrateurs</small>
                 </div>
             </div>
         </div>
@@ -22,8 +22,8 @@
         			<p class="text-uppercase mar-btm text-sm">Produits</p>
         			<i class="fas fa-box fa-5x"></i>
         			<hr>
-        			<p class="h2 text-thin">873</p>
-        			<small><span class="text-semibold"><i class="fa fa-unlock-alt fa-fw"></i> 154 </span>Produits limité</small>
+        			<p class="h2 text-thin">{{$data['p_count']}}</p>
+        			<small><span class="text-semibold"><i class="fa fa-unlock-alt fa-fw"></i> {{ $data['pactive_count']}} </span>Produits Disponible</small>
         		</div>
         	</div>
         </div>
@@ -33,8 +33,8 @@
         			<p class="text-uppercase mar-btm text-sm">Factures</p>
         			<i class="fas fa-file-invoice fa-5x"></i>
         			<hr>
-        			<p class="h2 text-thin">2,423</p>
-        			<small><span class="text-semibold"><i class="fa fa-shopping-cart fa-fw"></i> 954</span> Sales in this month</small>
+        			<p class="h2 text-thin">{{$data['i_count']}}</p>
+        			<small><span class="text-semibold"><i class="fa fa-shopping-cart fa-fw"></i> {{$data['inv_count_total']}}</span> Total ventes</small>
         		</div>
         	</div>
         </div>
@@ -44,8 +44,8 @@
         			<p class="text-uppercase mar-btm text-sm">Facture payé</p>
         			<i class="fa fa-shopping-cart fa-5x"></i>
         			<hr>
-        			<p class="h2 text-thin">7,428</p>
-        			<small><span class="text-semibold"><i class="fa fa-dollar fa-fw"></i> 22,675</span> Earning Today</small>
+        			<p class="h2 text-thin">{{$data['paid_count']}}</p>
+        			<small><span class="text-semibold"><i class="fa fa-dollar fa-fw"></i> {{$data['totalAmount']}} £</span> Revenue aujourdhui</small>
         		</div>
         	</div>
         </div>        

@@ -36,7 +36,16 @@
                                                     {data: "name", className: 'name'},
                                                     {data: "price", className: 'price'},
                                                     {data: "tax", className: 'tax'},
-                                                    {data: "is_active", className: 'is_active'},
+                                                    {data: "is_active",
+                                                    render : function(data,type,row){
+                                                            var label;
+                                                            if(data == "1"){
+                                                                return '<label class="badge badge-success">DISPONIBLE</label>'
+                                                            }else{
+                                                                return '<label class="badge badge-dark">INDISPONIBLE</label>'
+                                                            }
+                                                        },
+                                                     className: 'is_active'},
                                                     {data: "created_at", className: 'created_at'},
                                                     {
                                                     data: 'action', 
@@ -108,7 +117,7 @@
 
                                 <div class="form-group">
                                     <label for="tax">Tva prix :</label>
-                                    <input type="text" type=number step=any class="form-control" id="tax"required="">
+                                    <input type="text" type=number step=any class="form-control" id="tax" name="tax">
                                     @if ($errors->has('tax'))
                                     <span style="color: red;">{{ $errors->first('tax') }}</span>
                                     @endif

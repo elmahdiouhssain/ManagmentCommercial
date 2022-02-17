@@ -71,6 +71,7 @@
                     <div class="form-group">
                         <label>Unit : </label>
                         <select class="uml form-control" id="uml" name="uml">
+                        <option value="M²">M²</option>
                         <option value="U">U</option>
                         <option value="L">L</option>
                         <option value="ML">ML</option>

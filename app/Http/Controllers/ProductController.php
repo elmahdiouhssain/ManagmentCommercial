@@ -25,7 +25,7 @@ class ProductController extends Controller
             return Datatables::of($suppliers)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = "<a href='/products/edit/$row->id' class='btn btn-dark btn-sm'><i class='fas fa-cog'></i></a> <a href='/products/del/$row->id' class='btn btn-danger btn-sm'><i class='fas fa-trash'></i></a>";
+                    $actionBtn = "<a href='/products/edit/$row->id' class='btn btn-dark btn-sm'><i class='fas fa-cog'></i></a> ";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
