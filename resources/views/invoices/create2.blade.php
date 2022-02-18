@@ -25,28 +25,46 @@
                            
                                 <div class="form-group">
                                     <label for="customer_id">Client :</label>
-                                    <select class="form-control" name="customer_name" id="customer_name">
+                                    <select class="form-control" name="customer_id" id="customer_id">
                                         @foreach ($data['customers'] as $customer)
-                                        <option value="{{ $customer->nom_complete }}">{{ $customer->nom_complete }}</option>
+                                        <option value="{{ $customer->id }}">{{ $customer->nom_complete }}</option>
+                                        
                                         @endforeach
                                     </select>
-                                    @if ($errors->has('customer_name'))
-                                    <span style="color: red;">{{ $errors->first('customer_name') }}</span>
+                                    @if ($errors->has('customer_id'))
+                                    <span style="color: red;">{{ $errors->first('customer_id') }}</span>
                                     @endif
                                   
                                 </div>
                         
                                 <div class="form-group">
                                     <label for="supplier_id">Fournisseur :</label>
-                                    <select class="form-control" name="supplier_name" id="supplier_name">
+                                    <select class="form-control" name="supplier_id" id="supplier_id">
                                         @foreach ($data['suppliers'] as $supplier)
-                                        <option value="{{ $supplier->vendor_name }}">{{ $supplier->vendor_name }}</option>
-                                        @endforeach
+                                        <option value="{{ $supplier->id }}">{{ $supplier->vendor_name }}</option>
+                                        @endforeach 
                                     </select>
-                                    @if ($errors->has('supplier_name'))
-                                    <span style="color: red;">{{ $errors->first('supplier_name') }}</span>
+                                    @if ($errors->has('supplier_id'))
+                                    <span style="color: red;">{{ $errors->first('supplier_id') }}</span>
                                     @endif
-                                
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="total_ht">Libèlle :</label>
+                                    <input  type=text name="f_libelle" class="form-control" id="f_libelle" value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="total_ht">Réference :</label>
+                                    <input  type=text name="reference" class="form-control" id="reference" value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="total_tva">Conditions du règlement :</label>
+                                    <select class="form-control" id="condition" name="condition">
+                                        <option value="----**----">----**----</option>
+                                        <option value="Paiement à réception">Paiement à réception</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
@@ -60,9 +78,8 @@
                                 <div class="form-group">
                                     <label for="total_ht">Facturé par :</label>
                                     <input readonly type=text step=any name="user_name" class="form-control" id="user_name" value="{{Auth::user()->name}}">
-
+                                    <input readonly type=hidden step=any name="user_id" class="form-control" id="user_id" value="{{Auth::user()->id}}">
                                 </div>
-
 
                                 <div class="form-group">
                                     <button class="btn btn-danger btn-sm btn-block" type="submit"><i class="fas fa-file-invoice"></i> Etape suivant</button>
@@ -71,5 +88,4 @@
                         </div>
                     </div>
                 </div>
-
 @endsection

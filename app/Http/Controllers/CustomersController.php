@@ -25,7 +25,7 @@ class CustomersController extends Controller
             return Datatables::of($customers)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = "<a href='/customers/edit/$row->id' class='btn btn-dark btn-sm'><i class='fas fa-cog'></i></a> <a href='/customers/show/$row->id' class='btn btn-warning btn-sm'><i class='fas fa-eye'></i></a>";
+                    $actionBtn = "<a href='/customers/edit/$row->id' class='btn btn-dark btn-sm'><i class='fas fa-cog'></i></a> ";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])

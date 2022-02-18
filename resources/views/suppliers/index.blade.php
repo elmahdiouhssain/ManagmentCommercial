@@ -115,6 +115,73 @@
                                     @endif
                                 </div>
                                 <center>
+                                <hr>SOCIETE INFORMATIONS :<hr>
+                                </center>
+
+                                <div class="form-group">
+                                    <label for="nom_complete">Capital :</label>
+                                    <input type="number" name="capital"  step="any" class="form-control" id="capital"required="">
+                                    @if ($errors->has('capital'))
+                                    <span style="color: red;">{{ $errors->first('capital') }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nom_complete">Logo :</label>
+                                    <input type="text" name="logo" class="form-control" id="logo"required="">
+                                    @if ($errors->has('logo'))
+                                    <span style="color: red;">{{ $errors->first('logo') }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nom_complete">Bic :</label>
+                                    <input type="text" name="bic" class="form-control" id="bic"required="">
+                                    @if ($errors->has('bic'))
+                                    <span style="color: red;">{{ $errors->first('bic') }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nom_complete">Bank :</label>
+                                    <input type="text" name="bank" class="form-control" id="bank"required="">
+                                    @if ($errors->has('bank'))
+                                    <span style="color: red;">{{ $errors->first('bank') }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nom_complete">Rcs :</label>
+                                    <input type="text" name="rcs" class="form-control" id="rcs"required="">
+                                    @if ($errors->has('rcs'))
+                                    <span style="color: red;">{{ $errors->first('rcs') }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nom_complete">Naf :</label>
+                                    <input type="text" name="c_naf" class="form-control" id="c_naf"required="">
+                                    @if ($errors->has('c_naf'))
+                                    <span style="color: red;">{{ $errors->first('c_naf') }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nom_complete">N°siret :</label>
+                                    <input type="text" name="n_siret" class="form-control" id="n_siret"required="">
+                                    @if ($errors->has('n_siret'))
+                                    <span style="color: red;">{{ $errors->first('n_siret') }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nom_complete">N°immatriculation :</label>
+                                    <input type="text" name="n_immatriculation" class="form-control" id="n_immatriculation"required="">
+                                    @if ($errors->has('n_immatriculation'))
+                                    <span style="color: red;">{{ $errors->first('n_immatriculation') }}</span>
+                                    @endif
+                                </div>
+                                <center>
                                 <hr>AUTRE INFORMATIONS :<hr>
                                 </center>
                                 <div class="form-group">
@@ -175,6 +242,8 @@
                                     <span style="color: red;">{{ $errors->first('currency') }}</span>
                                     @endif
                                 </div>
+                                
+
 
                                 <div class="form-group">
                                     <button class="btn btn-danger btn-sm btn-block" type="submit">Enregistré</button>

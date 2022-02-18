@@ -1,10 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-
 <html>
 <head>
-    
     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
-    <title></title>
+    <title>PRINT INVOICE - {{$data['invoice']->id}}</title>
     <meta name="generator" content="https://conversiontools.io" />
     <meta name="author" content="Jean-Philippe"/>
     <meta name="created" content="2019-11-03T13:51:55"/>
@@ -16,18 +14,23 @@
     <meta name="LinksUpToDate" content="false"/>
     <meta name="ScaleCrop" content="false"/>
     <meta name="ShareDoc" content="false"/>
-    
+    <link href="{{ asset('/css/jquery.dataTables.min.css') }}" rel="stylesheet" media="screen">
+    <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('static/favicon.ico') }}" type="image/x-icon">
+
     <style type="text/css">
         body,div,table,thead,tbody,tfoot,tr,th,td,p { font-family:"Arial Narrow"; font-size:x-small }
         a.comment-indicator:hover + comment { background:#ffd; position:absolute; display:block; border:1px solid black; padding:0.5em;  } 
         a.comment-indicator { background:red; display:inline-block; border:1px solid black; width:0.5em; height:0.5em;  } 
         comment { display:none;  } 
     </style>
-    
 </head>
 
 <body>
-<table cellspacing="0" border="0">
+
+<center>
+
+<table  class="display" cellspacing="0" border="0" id="table">
     <colgroup width="446"></colgroup>
     <colgroup width="50"></colgroup>
     <colgroup width="46"></colgroup>
@@ -36,7 +39,9 @@
     <colgroup width="41"></colgroup>
     <colgroup width="91"></colgroup>
     <tr>
-        <td rowspan=5 height="110" align="left" valign=bottom><font face="Arial Narrow"><br><img src="result_htm_a41668a56c8640c4.png" width=98 height=100 hspace=174 vspace=7>
+        <?php $data['getsuppinfos'] = DB::select('select * from suppliers where id='.$data['invoice']->supplier_id);?>
+        <?php $data['getcustinfos'] = DB::select('select * from customers where id='.$data['invoice']->customer_id);?>
+        <td rowspan=5 height="110" align="left" valign=bottom><font face="Arial Narrow"><br><img src="{{$data['getsuppinfos'][0]->logo}}" width=98 height=100 hspace=174 vspace=7>
         </font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
@@ -71,72 +76,69 @@
         <td align="left" valign=bottom sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><font face="Arial Narrow"><br></font></td>
     </tr>
     <tr>
-        <td height="20" align="left" valign=bottom><b><font face="Arial Narrow">{{$data['invoice']->supplier_name}}</font></b></td>
+        
+        <td height="20" align="left" valign=bottom><b><font face="Arial Narrow">{{$data['getsuppinfos'][0]->vendor_name}}</font></b></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
-        <td colspan=4 rowspan=2 align="left" valign=middle><b><font face="Arial Narrow" size=3>Title - First name - Last name</font></b></td>
+        <td colspan=4 rowspan=2 align="left" valign=middle><b><font face="Arial Narrow" size=3>{{$data['getsuppinfos'][0]->fname}}</font></b></td>
         </tr>
     <tr>
-        <td height="20" align="left" valign=bottom><font face="Arial Narrow">Centre IDEM</font></td>
+
+        <td height="20" align="left" valign=bottom><font face="Arial Narrow">{{$data['getsuppinfos'][0]->vendor_name}}</font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
         </tr>
     <tr>
-        <td height="22" align="left" valign=bottom><font face="Arial Narrow">129 avenue de Gen&egrave;ve</font></td>
+        <td height="22" align="left" valign=bottom><font face="Arial Narrow">{{$data['getsuppinfos'][0]->addr1}}</font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
-        <td colspan=4 align="left" valign=middle><font face="Arial Narrow">Adress</font></td>
+        <td colspan=4 align="left" valign=middle><font face="Arial Narrow">{{$data['getcustinfos'][0]->nom_complete}}</font></td>
         </tr>
     <tr>
-        <td height="22" align="left" valign=bottom><font face="Arial Narrow">74000 ANNECY</font></td>
+        <td height="22" align="left" valign=bottom><font face="Arial Narrow">{{$data['getsuppinfos'][0]->city}} || {{$data['getsuppinfos'][0]->zipcode}}</font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
-        <td colspan=4 align="left" valign=middle><font face="Arial Narrow">ZIP Code - CITY</font></td>
+        <td colspan=4 align="left" valign=middle><font face="Arial Narrow">{{$data['getcustinfos'][0]->zipcode}} - {{$data['getcustinfos'][0]->city}}</font></td>
         </tr>
     <tr>
-        <td height="22" align="left" valign=bottom><font face="Arial Narrow">T&eacute;l. 04 58 10 19 46</font></td>
+        <td height="22" align="left" valign=bottom><font face="Arial Narrow">T&eacute;{{$data['getsuppinfos'][0]->tele}}</font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
         <td colspan=4 align="left" valign=middle><font face="Arial Narrow"><br></font></td>
         </tr>
     <tr>
-        <td height="22" align="left" valign=bottom><font face="Arial Narrow">contact@my-home-concept.fr</font></td>
+        <td height="22" align="left" valign=bottom><font face="Arial Narrow">{{$data['getsuppinfos'][0]->email}}</font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
-        <td colspan=4 align="left" valign=middle><font face="Arial Narrow">Tel: </font></td>
+        <td colspan=4 align="left" valign=middle><font face="Arial Narrow">Tel: {{$data['getcustinfos'][0]->mobile}}</font></td>
         </tr>
     <tr>
-        <td height="22" align="left" valign=bottom><font face="Arial Narrow">N&deg; SIRET : 892 331 711 00010</font></td>
+        <td height="22" align="left" valign=bottom><font face="Arial Narrow">N&deg; SIRET : {{$data['getsuppinfos'][0]->n_siret}}</font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
-        <td colspan=4 align="left" valign=middle><font face="Arial Narrow">Email: </font></td>
+        <td colspan=4 align="left" valign=middle><font face="Arial Narrow">Email: {{$data['getcustinfos'][0]->email}}</font></td>
         </tr>
     <tr>
-        <td height="22" align="left" valign=bottom><font face="Arial Narrow">N&deg; TVA Intracommunautaire : FR09 892 331 711</font></td>
+        <td height="22" align="left" valign=bottom><font face="Arial Narrow">N&deg; TVA Intracommunautaire : {{$data['getsuppinfos'][0]->n_immatriculation}}</font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
-        <td colspan=4 align="left" valign=middle><font face="Arial Narrow">TVA : </font></td>
+
         </tr>
     <tr>
-        <td height="22" align="left" valign=bottom><font face="Arial Narrow">Code NAF : 4399C</font></td>
+        <td height="22" align="left" valign=bottom><font face="Arial Narrow">Code NAF : {{$data['getsuppinfos'][0]->c_naf}}</font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
         <td colspan=4 align="left" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
         </tr>
     <tr>
-        <td height="22" align="left" valign=bottom><font face="Arial Narrow">RCS : RCS d&rsquo;ANNECY</font></td>
-        <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
-        <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
-        <td align="left" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
-        <td align="left" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
-        <td align="left" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
-        <td align="left" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
+        <td height="22" align="left" valign=bottom><font face="Arial Narrow">RCS : {{$data['getsuppinfos'][0]->rcs}}</font></td>
+      
     </tr>
     <tr>
-        <td height="22" align="left" valign=bottom><font face="Arial Narrow">Capital : 1 000 &euro;</font></td>
+        <td height="22" align="left" valign=bottom><font face="Arial Narrow">Capital : {{$data['getsuppinfos'][0]->capital}} &euro;</font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
-        <td colspan=4 align="left" valign=middle><font face="Arial Narrow">Annecy, le <?php echo date("d-m-Y");?></font></td>
+        <td colspan=4 align="left" valign=middle><font face="Arial Narrow">{{$data['getsuppinfos'][0]->country}}, le <?php echo date("d-m-Y");?></font></td>
         </tr>
     <tr>
         <td height="22" align="left" valign=bottom><font face="Arial Narrow"><br></font></td>
@@ -153,9 +155,9 @@
         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=3 align="left" valign=middle sdnum="1033;0;#,##0.00_ ;[RED]-#,##0.00 "><b><font face="Arial Narrow">Conditions de r&egrave;glement</font></b></td>
         </tr>
     <tr>
-        <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=2 height="32" align="left" valign=middle><font face="Arial Narrow">LOT : PLATRERIE / PEINTURE</font></td>
-        <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=2 align="left" valign=middle><font face="Arial Narrow"><br></font></td>
-        <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=3 align="left" valign=middle sdnum="1033;0;#,##0.00_ ;[RED]-#,##0.00 "><font face="Arial Narrow">Paiement &agrave; r&eacute;ception</font></td>
+        <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=2 height="32" align="left" valign=middle><font face="Arial Narrow">{{$data['invoice']->f_libelle}}</font></td>
+        <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=2 align="left" valign=middle><font face="Arial Narrow"></font>{{$data['invoice']->reference}}</td>
+        <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=3 align="left" valign=middle sdnum="1033;0;#,##0.00_ ;[RED]-#,##0.00 "><font face="Arial Narrow">{{$data['invoice']->condition}}</font></td>
         </tr>
     <tr>
         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000" height="22" align="left" valign=middle><font face="Arial Narrow"><br></font></td>
@@ -175,15 +177,7 @@
         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdnum="1033;0;0%"><b><font face="Arial Narrow">%</font></b></td>
         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><b><font face="Arial Narrow">M. factur&eacute;</font></b></td>
     </tr>
-    <tr>
-        <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" height="22" align="left" valign=middle><b><font face="Arial Narrow">LOT : PLATRERIE / PEINTURE</font></b></td>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><b><font face="Arial Narrow"><br></font></b></td>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><b><font face="Arial Narrow"><br></font></b></td>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdnum="1033;0;0%"><b><font face="Arial Narrow"><br></font></b></td>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><b><font face="Arial Narrow"><br></font></b></td>
-    </tr>
+
     <tr>
         <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" height="22" align="center" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
         <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
@@ -204,14 +198,10 @@
     </tr>
 
 
-
-
-
-
     
- @foreach ($data['products'] as $prod)
+ @foreach ($data['products'] as $key => $prod)
     <tr>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" height="17" align="left" valign=middle><font face="Arial Narrow">3.0.0.1 {{ $prod->designation }}</font></td>
+        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" height="17" align="left" valign=middle><font face="Arial Narrow">3.0.0.{{ ++$key }} || <b>{{ $prod->designation }}</b></font></td>
         <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><font face="Arial Narrow">{{ $prod->uml }}</font></td>
         <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdval="35.75" sdnum="1033;0;#,##0.00_ ;[RED]-#,##0.00 "><font face="Arial Narrow">{{ $prod->qte }} </font></td>
         <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><font face="Arial Narrow"></font>{{ $prod->p_u }} euro</td>
@@ -222,22 +212,7 @@
     @endforeach
 
 
-    <tr>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" height="17" align="left" valign=middle><font face="Arial Narrow"><br></font></td>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><font face="Arial Narrow"><br></font></td>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdnum="1033;0;#,##0.00_ ;[RED]-#,##0.00 "><font face="Arial Narrow"><br></font></td>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><font face="Arial Narrow"><br></font></td>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><font face="Arial Narrow"><br></font></td>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdnum="1033;0;0%"><font face="Arial Narrow"><br></font></td>
-        <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><font face="Arial Narrow"><br></font></td>
-    </tr>
-    
-
-
-
-
-
-
+<!-- SPACE ROWS -->
     <tr>
         <td style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" height="22" align="left" valign=middle><font face="Arial Narrow" color="#000000"><br></font></td>
         <td style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
@@ -256,13 +231,16 @@
         <td style="border-top: 1px solid #000000" align="center" valign=middle sdnum="1033;0;0%"><b><font face="Arial Narrow"><br></font></b></td>
         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000" align="center" valign=middle sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><b><font face="Arial Narrow"><br></font></b></td>
     </tr>
+<!--END ROWS-->
+
+
     <tr>
         <td height="22" align="left" valign=middle><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=middle><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=2 rowspan=2 align="center" valign=middle><b><font face="Arial Narrow">TOTAL &euro; H.T.</font></b></td>
         <td rowspan=2 align="center" valign=middle sdnum="1033;0;0%"><b><font face="Arial Narrow"><br></font></b></td>
-        <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=2 align="center" valign=middle sdval="0" sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><b><font face="Arial Narrow">0.00 &euro;</font></b></td>
+        <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=2 align="center" valign=middle sdval="0" sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><b><font face="Arial Narrow">{{$data['invoice']->total_ht}} &euro;</font></b></td>
     </tr>
     <tr>
         <td height="22" align="left" valign=middle><font face="Arial Narrow"><br></font></td>
@@ -281,7 +259,7 @@
         <td height="22" align="left" valign=middle><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=middle><font face="Arial Narrow"><br></font></td>
         <td align="left" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
-        <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=2 align="center" valign=middle><b><font face="Arial Narrow"> TVA 10%</font></b></td>
+        <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=2 align="center" valign=middle><b><font face="Arial Narrow"> TVA 0%</font></b></td>
         <td align="center" valign=middle sdnum="1033;0;0%"><b><font face="Arial Narrow"><br></font></b></td>
         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle sdval="0" sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><b><font face="Arial Narrow">0.00 &euro;</font></b></td>
     </tr>
@@ -311,7 +289,7 @@
         <td align="center" valign=middle sdnum="1033;0;#,##0.00 &quot;&euro;&quot;;[RED]-#,##0.00 &quot;&euro;&quot;"><b><font face="Arial Narrow"><br></font></b></td>
     </tr>
     <tr>
-        <td colspan=2 rowspan=4 height="88" align="left" valign=middle><font face="Arial Narrow">HOME CONCEPT SAS<br>Banque : Soci&eacute;t&eacute; G&eacute;n&eacute;rale<br>IBAN : FR76 3000 3001 0500 0204 5223 586<br>BIC : SOGEFRPP</font></td>
+        <td colspan=2 rowspan=4 height="88" align="left" valign=middle><font face="Arial Narrow">{{$data['getsuppinfos'][0]->vendor_name}}<br>Banque : {{$data['getsuppinfos'][0]->bank}}<br>IBAN : 00000000<br>BIC : {{$data['getsuppinfos'][0]->bic}}</font></td>
         <td align="center" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
         <td align="center" valign=middle><b><font face="Arial Narrow"><br></font></b></td>
         <td align="center" valign=middle><b><font face="Arial Narrow"><br></font></b></td>

@@ -9,58 +9,6 @@
     <script type="text/javascript" src="{{ asset('/js/ck/vfs_fonts.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/ck/buttons.html5.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/ck/buttons.print.min.js') }}"></script>
-  								<script type="text/javascript">
-                                        $(document).ready(function() {
-                                        $("#emptableid").DataTable({
-                                                serverSide: true,
-                                                ajax: {
-                                                    url: '{{ route('invoices') }}',
-                                                    data: function (data) {
-                                                        data.params = {
-                                                            sac: "helo"
-                                                        }
-                                                    }
-                                                },
-                                                
-                                                buttons: true,
-                                                searching: true,
-                                                scrollY: 500,
-                                                scrollX: false,
-                                                scrollCollapse: true,
-                                                dom: 'Bfrtip',
-                                                buttons: ['copyHtml5',
-                                                'excelHtml5',
-                                                'csvHtml5',
-                                                'pdfHtml5'],
-                                                    columns: [
-                                                    {data: "customer_name", className: 'customer_name'},
-                                                    {data: "relase_date", className: 'relase_date'},
-                                                    {data: "total_ht", className: 'total_ht'},
-                                                    {data: "is_paid",
-                                                        render : function(data,type,row){
-                                                            var label;
-                                                            if(data == "1"){
-                                                                return '<label class="badge badge-success">PAYE</label>'
-                                                            }else{
-                                                                return '<label class="badge badge-danger">NONPAYE</label>'
-                                                            }
-                                                        },
-                                                     className: 'is_paid'},
-
-                                                    {data: "supplier_name", className: 'supplier_name'},
-                                                    {data: "user_name", className: 'user_name'},
-                                                    {data: "created_at", className: 'created_at'},
-                                                    {
-                                                    data: 'action', 
-                                                    name: 'action', 
-                                                    orderable: true, 
-                                                    searchable: true
-                                                },
-                                                
-                                                ]  
-                                            });
-                                        });
-                            </script>
 
 		<div class="container">
 					<div class="row">
@@ -96,7 +44,35 @@
         		                  <th>Action </th>
         		                </tr>
         		            </thead>
-        		        <tbody></tbody>
+        		        <tbody>
+                      @foreach ($data['invoices'] as $inv)
+                      <tr>
+                          <?php $cus_name = DB::select('select * from customers where id='.$inv->customer_id);?>
+                          @if (!empty($cus_name))
+                          <td>{{ $cus_name[0]->nom_complete }}</td>
+                          @else
+                          <td style="color: red;">--Clien supprimé--</td>
+                          @endif
+
+                          <td>{{ $inv->relase_date }}</td>
+                          <td>{{ $inv->total_ht }}</td>
+                          @if ($inv->is_paid == "1")
+                          <td><label class="badge badge-success">PAID</label></td>
+                            
+                            @else
+                            <td><label class="badge badge-danger">UNPAID</label></td>
+                            @endif
+
+                          <?php $sup_name = DB::select('select * from suppliers where id='.$inv->supplier_id);?>
+                          <td>{{ $sup_name[0]->vendor_name }}</td>
+   
+                          <td>[ {{ $inv->user_name }} ]</td>
+                          <td>{{ $inv->created_at }}</td>
+
+                          <td><a href='/invoices/{{ $inv->id }}' class='btn btn-dark btn-sm'><i class='fas fa-cog'></i></a> <a href='/invoices/pdf/{{ $inv->id }}' target='_blank' class='btn btn-primary btn-sm'><i class='fas fa-eye'></i></a> <a href=''class='btn btn-success btn-sm'><i class='fas fa-save'></i></a></td>
+                      </tr>
+                      @endforeach      
+                       
         		        </table>                                
         		</div>
                 </div>

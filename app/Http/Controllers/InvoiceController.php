@@ -11,8 +11,6 @@ use App\Models\Suppliers;
 use App\Models\Products;
 use App\Models\Invoices;
 use App\Models\ProductsInvoice;
-
-
 use DataTables;
 
 class InvoiceController extends Controller
@@ -26,7 +24,6 @@ class InvoiceController extends Controller
 
     public function InvoicesProductShowAjax(Request $request, $invoice_id) {
         $data['title'] = "Invoices list ajax";
-        //$invoice_id = 
         $data['invoicesprod'] = DB::select('select * from products_invoices where invoice_id ='.$invoice_id);
         return response()->json($data['invoicesprod']);
     }
@@ -38,8 +35,7 @@ class InvoiceController extends Controller
             return Datatables::of($invoices)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = "<a href='/invoices/$row->id' class='btn btn-dark btn-sm'><i class='fas fa-cog'></i></a> <a href='/invoices/pdf/$row->id' target='_blank' class='btn btn-primary btn-sm'><i class='fas fa-eye'></i></a> <a href='' class='btn btn-success btn-sm'><i class='fas fa-save'></i></a>";
-
+                    $actionBtn = "<a href='/invoices/$row->id' class='btn btn-dark btn-sm'><i class='fas fa-cog'></i></a> <a href='/invoices/pdf/$row->id' target='_blank' class='btn btn-primary btn-sm'><i class='fas fa-eye'></i></a> <a href=''class='btn btn-success btn-sm'><i class='fas fa-save'></i></a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -48,10 +44,25 @@ class InvoiceController extends Controller
     }
 
     public function createStep1(){
-        $data['customers'] = Customers::latest()->get();
-        $data['suppliers'] = Suppliers::latest()->get();
+        $data['customers'] = Customers::all();
+        $data['suppliers'] = Suppliers::all();
         return view('invoices.create2',compact('data'));
     }
+
+    public function createStep3(Request $request, $id){
+        $this->validate($request, [
+            'total_ht' => 'required',
+        ]);
+
+        $id = $request->input('inv_id');
+        $total_price = $request->input('total_ht');
+        //dd($id);
+        DB::update('update invoices set total_ht=? where id = ?',[$total_price,$id]);
+        
+        return redirect('/invoices')->with('success', 'Facture enregistré avec succée');
+    }
+
+
 
     public function create(){
         $data['customers'] = Customers::latest()->get();
@@ -61,37 +72,28 @@ class InvoiceController extends Controller
     }
 
     public function store(Request $request)
-        {
-            $this->validate($request, [
-            'customer_name' => 'required',
+    {
+        $this->validate($request, [
+            'customer_id' => 'required',
+            'supplier_id' => 'required',
             'user_name' => 'required',
-            'supplier_name' => 'required',
         ]);
+
         $post = new Invoices();
-        $post->customer_name = $request->input('customer_name');
-        $post->supplier_name = $request->input('supplier_name');
+        $post->user_id = \Auth::User()->id;
         $post->is_paid = $request->input('is_paid');
-        $post->user_name = \Auth::User()->name;
+        $post->user_name = $request->input('user_name');
+        $post->customer_id = $request->input('customer_id');
+        $post->supplier_id = $request->input('supplier_id');
         $post->relase_date = date('Y-m-d H:i:s');
+        $post->reference = $request->input('reference');
+        $post->f_libelle = $request->input('f_libelle');
+        $post->condition = $request->input('condition');
         $post->save();
         $invoice_id = $post->id;
         return redirect('/invoices/'.$invoice_id)->with('success', 'Etape2 : selection du produits ');
-        }
+    }
 
-    public function storeTOTAL(Request $request)
-        {
-            $this->validate($request, [
-            'total_ht' => 'required',
-
-        ]);
-
-        $post->total_ht = $request->input('customer_name');
-        $post->user_name = \Auth::User()->name;
-        $post->relase_date = date('Y-m-d H:i:s');
-        $post->save();
-
-        return redirect('/invoices/'.$invoice_id)->with('success', 'Facture géneré avec succée');
-        }
 
     public function show($invoice_id)
     {
@@ -112,8 +114,7 @@ class InvoiceController extends Controller
             $invoice = Invoices::find($id);
             $invoice->delete();
             return redirect('/invoices')->with('success', 'Facture supprimé avec succée');
-
-        }
+    }
 
 
 }

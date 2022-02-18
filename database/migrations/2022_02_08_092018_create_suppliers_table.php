@@ -26,6 +26,16 @@ class CreateSuppliersTable extends Migration
             $table->string('city')->nullable();
             $table->string('zipcode')->nullable();
             $table->string('province')->nullable();
+
+            $table->decimal('capital')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('bic')->nullable();
+            $table->string('bank')->nullable();
+            $table->string('rcs')->nullable();
+            $table->string('c_naf')->nullable();
+            $table->string('n_siret')->nullable();
+            $table->string('n_immatriculation')->nullable();
+            
             $table->timestamps();
         });
     }

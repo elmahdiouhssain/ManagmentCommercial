@@ -21,6 +21,15 @@ class Suppliers extends Model
         'addr2',
         'city',
         'zipcode',
-        'province',    
+        'province', 
+         
+        'capital',
+        'logo',
+        'bic',
+        'bank',
+        'rcs',
+        'c_naf',
+        'n_siret',
+        'n_immatriculation',  
     ];
 }

@@ -52,6 +52,17 @@ class SupplierController extends Controller
         $post->country = $request->input('country');
         $post->province = $request->input('province');
         $post->fname = $request->input('fname');
+
+        $post->capital = $request->input('capital');
+        $post->logo = $request->input('logo');
+        $post->bic = $request->input('bic');
+        $post->bank = $request->input('bank');
+        $post->rcs = $request->input('rcs');
+
+        $post->c_naf = $request->input('c_naf');
+        $post->n_siret = $request->input('n_siret');
+        $post->n_immatriculation = $request->input('n_immatriculation');
+
         $post->save();
         return redirect('/suppliers')->with('success', 'Fournisseur enregistré avec succée !');
         }
@@ -75,7 +86,16 @@ class SupplierController extends Controller
             $province = $request->input('province');
             $fname = $request->input('fname');
 
-            DB::update('update suppliers set vendor_name=?,email=?,tele=?,currency=?,addr1=?,addr2=?,city=?,zipcode=?,country=?,province=?,fname=? where id = ?',[$vendor_name,$email,$tele,$currency,$addr1,$addr2,$city,$zipcode,$country,$province,$fname,$id]);
+            $capital = $request->input('capital');
+            $logo = $request->input('logo');
+            $bic = $request->input('bic');
+            $bank = $request->input('bank');
+            $rcs = $request->input('rcs');
+            $c_naf = $request->input('c_naf');
+            $n_siret = $request->input('n_siret');
+            $n_immatriculation = $request->input('n_immatriculation');
+
+            DB::update('update suppliers set vendor_name=?,email=?,tele=?,currency=?,addr1=?,addr2=?,city=?,zipcode=?,country=?,province=?,fname=?,capital=?,logo=?,bic=?,bank=?,rcs=?,c_naf=?,n_siret=?,n_immatriculation=? where id = ?',[$vendor_name,$email,$tele,$currency,$addr1,$addr2,$city,$zipcode,$country,$province,$fname,$capital,$logo,$bic,$bank,$rcs,$c_naf,$n_siret,$n_immatriculation,$id]);
 
             return redirect('/suppliers')->with('success', 'Fournisseur modifié avec succée !');
 

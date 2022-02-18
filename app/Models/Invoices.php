@@ -10,15 +10,21 @@ class Invoices extends Model
     protected $table = 'invoices';
     public $timestamps = true;
     protected $fillable = [
-        'customer_name',
+        'customer_id',
+        'user_id',
+        'supplier_id',
         'user_name',
-        'supplier_name',
         'relase_date',
         'pdf_url',
         'total_ht',
         'total_tva',
         'total_ttc',
         'is_paid'=> 'boolean',
+
+        'reference',
+        'f_libelle',
+        'condition',
+
     ];
 
 }
