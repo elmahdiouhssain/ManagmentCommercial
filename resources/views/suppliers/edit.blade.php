@@ -180,8 +180,9 @@
                                     <label for="currency">Devis :</label>
                                     <select class="form-control" name="currency">
                                         <option selected ><?php echo$data['supplier'][0]->currency; ?></option>
-                                        <option>DOLLAR (USD)</option>
-                                        <option>EURO (EUR)</option>
+                                        <option>DOLLAR ($)</option>
+                                        <option>EURO (€)</option>
+                                        <option>CHF (£)</option>
                                     </select>
                                     @if ($errors->has('currency'))
                                     <span style="color: red;">{{ $errors->first('currency') }}</span>

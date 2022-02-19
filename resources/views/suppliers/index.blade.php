@@ -233,10 +233,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="currency">Devis :</label>
+                                    <label for="currency">Devise :</label>
                                     <select class="form-control" name="currency">
-                                    	<option>DOLLAR (USD)</option>
-                                    	<option>EURO (EUR)</option>
+                                        <option>DOLLAR ($)</option>
+                                        <option>EURO (€)</option>
+                                        <option>CHF (£)</option>
                                     </select>
                                     @if ($errors->has('currency'))
                                     <span style="color: red;">{{ $errors->first('currency') }}</span>
