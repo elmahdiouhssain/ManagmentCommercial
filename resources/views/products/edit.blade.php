@@ -17,6 +17,7 @@
 
 		        
 		        <!-- Modal body -->
+                <br><br><br>
 		        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
                     @include('flash-message')
                     <div class="card">

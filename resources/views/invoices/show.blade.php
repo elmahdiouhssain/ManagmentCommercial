@@ -144,16 +144,31 @@
                                 <div class="col">
                                 <div class="form-group">
                                     <label for="total_ht">Total prix :</label>
-                                    
                                     <input readonly  type=number step=any name="total_ht" class="total_ht form-control" id="total_ht" required="">
                                     @if ($errors->has('total_ht'))
                                     <span style="color: red;">{{ $errors->first('total_ht') }}</span>
                                     @endif
                                 </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                    <label for="is_paid">Paiement :</label>
+                                    <select class="is_paid form-control" id="is_paid" name="is_paid">
+                                        @if ($data['invoice']->is_paid)
+                                        <option selected value="1" style="color:green;">PAYE</option>
+                                        @else
+                                        <option selected value="0" style="red:green;">NONPAYE</option>
+                                        @endif
+                                    <option value="1">PAYE</option>
+                                    <option value="0">NONPAYE</option>
 
-                              
+                                    </select>
+                                    @if ($errors->has('is_paid'))
+                                    <span style="color: red;">{{ $errors->first('is_paid') }}</span>
+                                    @endif
+                                </div>
+                                </div>
 
-                                 </div>
                             </div>
                                 <div class="form-group">
                                     <button class="btn btn-danger btn-sm btn-block" type="submit"><i class="fas fa-save"></i> Enregistré</button>

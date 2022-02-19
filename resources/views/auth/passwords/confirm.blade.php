@@ -79,7 +79,9 @@
     </div>
 </div>
 </body>
-<footer class="page-footer font-small blue"><div class="footer-copyright text-center py-3">© 2022 Copyright:<a href="https://github.com/elmahdiouhssain/" style="color:red;">Elmahdi ouhssain.</a></div></footer>
+  <!-- Footer -->
+    <footer class="page-footer font-small blue"><div class="footer-copyright text-center py-3">© 2022 Copyright:<a href="http://my-home-concept.fr/fr/home-fr/" style="color:red;">Home Concept – 129 Avenue de Genève – 74000.</a></div></footer>
+    <!-- Footer -->
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('/js/modernizr.min.js') }}"></script>

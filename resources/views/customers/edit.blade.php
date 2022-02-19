@@ -17,6 +17,7 @@
 
 		        
 		        <!-- Modal body -->
+                <br><br><br>
 		        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
                     @include('flash-message')
                     <div class="card">
@@ -27,6 +28,19 @@
                                     <input type="text" name="nom_complete" class="form-control" id="nom_complete" value="<?php echo$data['customer'][0]->nom_complete; ?>">
                                     @if ($errors->has('nom_complete'))
                                     <span style="color: red;">{{ $errors->first('nom_complete') }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="currency">Gender :</label>
+                                    <select class="form-control" name="gender">
+                                        <option selected value=""><?php echo$data['customer'][0]->gender; ?></option>
+                                        <option>Mr</option>
+                                        <option>Mrs</option>
+                                        <option>Miss</option>
+                                    </select>
+                                    @if ($errors->has('gender'))
+                                    <span style="color: red;">{{ $errors->first('gender') }}</span>
                                     @endif
                                 </div>
 
@@ -116,8 +130,9 @@
                                     <label for="currency">Devis :</label>
                                     <select class="form-control" name="currency">
                                         <option selected ><?php echo$data['customer'][0]->currency; ?></option>
-                                    	<option>DOLLAR (USD)</option>
-                                    	<option>EURO (EUR)</option>
+                                    	<option>DOLLAR ($)</option>
+                                        <option>EURO (€)</option>
+                                        <option>CHF (£)</option>
                                     </select>
                                     @if ($errors->has('currency'))
                                     <span style="color: red;">{{ $errors->first('currency') }}</span>

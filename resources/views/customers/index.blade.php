@@ -92,6 +92,18 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="currency">Gender :</label>
+                                    <select class="form-control" name="gender">
+                                        <option>Mr</option>
+                                        <option>Mrs</option>
+                                        <option>Miss</option>
+                                    </select>
+                                    @if ($errors->has('gender'))
+                                    <span style="color: red;">{{ $errors->first('gender') }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
                                     <label for="email">Email :</label>
                                     <input type="email" name="email" class="form-control" id="email"required="">
                                     @if ($errors->has('email'))
@@ -176,8 +188,9 @@
                                 <div class="form-group">
                                     <label for="currency">Devise :</label>
                                     <select class="form-control" name="currency">
-                                    	<option>DOLLAR (USD)</option>
-                                    	<option>EURO (EUR)</option>
+                                    	<option>DOLLAR ($)</option>
+                                    	<option>EURO (€)</option>
+                                        <option>CHF (£)</option>
                                     </select>
                                     @if ($errors->has('currency'))
                                     <span style="color: red;">{{ $errors->first('currency') }}</span>

@@ -1,0 +1,8 @@
+http://38.242.209.2/
+user : admin@admin.com
+pass : passpass
+
+
+the source code of the project on github 
+
+https://github.com/elmahdiouhssain/commercialmanagment

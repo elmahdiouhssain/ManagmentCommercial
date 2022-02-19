@@ -43,6 +43,7 @@ class CustomersController extends Controller
             
         $post = new Customers();
         $post->nom_complete = $request->input('nom_complete');
+        $post->gender = $request->input('gender');
         $post->email = $request->input('email');
         $post->tele = $request->input('tele');
         $post->currency = $request->input('currency');
@@ -72,6 +73,7 @@ class CustomersController extends Controller
 
         public function update(Request $request,$id) {
             $nom_complete = $request->input('nom_complete');
+            $gender = $request->input('gender');
             $email = $request->input('email');
             $tele = $request->input('tele');
             $currency = $request->input('currency');
@@ -87,7 +89,7 @@ class CustomersController extends Controller
             $website = $request->input('website');
             $note = $request->input('note');
 
-            DB::update('update customers set nom_complete=?,email=?,tele=?,currency=?,addr1=?,addr2=?,city=?,zipcode=?,country=?,province=?,account_number=?,fax=?,mobile=?,website=?,note=? where id = ?',[$nom_complete,$email,$tele,$currency,$addr1,$addr2,$city,$zipcode,$country,$province,$account_number,$fax,$mobile,$website,$note,$id]);
+            DB::update('update customers set nom_complete=?,gender=?,email=?,tele=?,currency=?,addr1=?,addr2=?,city=?,zipcode=?,country=?,province=?,account_number=?,fax=?,mobile=?,website=?,note=? where id = ?',[$nom_complete,$gender,$email,$tele,$currency,$addr1,$addr2,$city,$zipcode,$country,$province,$account_number,$fax,$mobile,$website,$note,$id]);
 
             return redirect('/customers')->with('success', 'Client modifié avec succée !');
 

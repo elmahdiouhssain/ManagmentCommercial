@@ -56,8 +56,11 @@ class InvoiceController extends Controller
 
         $id = $request->input('inv_id');
         $total_price = $request->input('total_ht');
-        //dd($id);
-        DB::update('update invoices set total_ht=? where id = ?',[$total_price,$id]);
+        $user_name = \Auth::User()->name;
+        $is_paid = $request->input('is_paid');
+
+        //dd($is_paid);
+        DB::update('update invoices set total_ht=?,is_paid=?,user_name=? where id = ?',[$total_price,$is_paid,$user_name,$id]);
         
         return redirect('/invoices')->with('success', 'Facture enregistré avec succée');
     }
