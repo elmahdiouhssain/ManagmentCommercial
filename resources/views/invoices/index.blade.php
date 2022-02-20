@@ -34,7 +34,6 @@
         		        <table class="table table-striped" id="emptableid" width="100%">
         		            <thead>
         		                <tr>
-        		                  <th>Facture pour</th>
         		                  <th>Date</th>
         		                  <th>Total</th>
                                   <th>Paiement</th>
@@ -47,12 +46,7 @@
         		        <tbody>
                       @foreach ($data['invoices'] as $inv)
                       <tr>
-                          <?php $cus_name = DB::select('select * from customers where id='.$inv->customer_id);?>
-                          @if (!empty($cus_name))
-                          <td>{{ $cus_name[0]->nom_complete }}</td>
-                          @else
-                          <td style="color: red;">--Clien supprimé--</td>
-                          @endif
+                          
 
                           <td>{{ $inv->relase_date }}</td>
                           <td>{{ $inv->total_ht }}</td>
